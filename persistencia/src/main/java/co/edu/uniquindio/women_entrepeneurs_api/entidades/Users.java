@@ -56,25 +56,9 @@ public class Users implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
-    @OneToOne(mappedBy="user")
-    private Favorite favorite;
-
-    @OneToOne(mappedBy = "user")
-    private ShoppingCart shoppingCart;
 
     @ManyToOne
     @NotNull
     private LevelAccess levelAccess;
 
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
-    private List<Coupon> couponList;
-
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
-    private List<Comment> commentList;
-
-    @OneToMany(mappedBy = "user")
-    @ToString.Exclude
-    private List<Bill> billList;
 }

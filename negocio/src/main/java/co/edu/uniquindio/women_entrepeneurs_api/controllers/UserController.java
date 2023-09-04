@@ -34,20 +34,4 @@ public class UserController {
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error",e.getMessage() ));
         }
     }
-    @GetMapping("/bill/getAll")
-    public ResponseEntity<MessageDTO> getAllBill(HttpServletRequest request)  throws Exception{
-        try{
-            String authorizationHeader = request.getHeader("Authorization");
-
-            String jwtToken = authorizationHeader.substring(7); // eliminamos el prefijo "Bearer "
-
-            String email = TokenUtils.getEmailFromJWTToken(jwtToken);
-
-            List<BillDTO> billList = userServiceImpl.getAllBills(email);
-            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"Obtencion de compras correcta",billList ));
-
-        } catch (Exception e) {
-            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error",e.getMessage() ));
-        }
-    }
 }

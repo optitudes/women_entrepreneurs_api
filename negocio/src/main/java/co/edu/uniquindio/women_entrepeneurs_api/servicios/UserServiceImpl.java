@@ -1,11 +1,8 @@
 package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 
-import co.edu.uniquindio.women_entrepeneurs_api.dto.BillDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginRequestDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
-import co.edu.uniquindio.women_entrepeneurs_api.entidades.Bill;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.LevelAccess;
-import co.edu.uniquindio.women_entrepeneurs_api.entidades.Product;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.Users;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.LevelAccessRepo;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.UserRepo;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -73,13 +69,6 @@ public class UserServiceImpl implements UserService{
         return userRepo.findAll();
     }
 
-
-    @Override
-    public List<String[]> listComments(){return userRepo.listarNombresUsuariosYComentarios();}
-
-    @Override
-    public List<Product> listFavorites(String email){return userRepo.obtenerProductosFavoritosUser(email);}
-
     @Override
     public String[] login(LoginRequestDTO loginInfo) throws Exception {
 
@@ -92,18 +81,5 @@ public class UserServiceImpl implements UserService{
             throw  new Exception(user.toString());
         }
     }
-
-    @Override
-    public List<BillDTO> getAllBills(String email) throws Exception {
-        List<Bill> bills = userRepo.getBills(email);
-        return bills.stream()
-                .map(this::transformBill)
-                .collect(Collectors.toList());
-    }
-    private BillDTO transformBill(Bill bill) {
-        BillDTO transformedBill = new BillDTO(bill.getId(),bill.getBillCode(),bill.getTotal());
-        return transformedBill;
-    }
-
 
 }
