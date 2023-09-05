@@ -26,23 +26,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean registerUser(UserRegisterDTO newUserInfo) throws Exception {
 
-        Optional<Users> searched = userRepo.findByDni(newUserInfo.getDni());
-        if (searched.isPresent()){
-            throw new Exception("El DNI del usuario ya existe");
-        }
-        searched = userRepo.findByEmail(newUserInfo.getEmail());
+        Optional<Users> searched = userRepo.findByEmail(newUserInfo.getEmail());
         if (searched.isPresent()){
             throw new Exception("El correo del usuario ya existe");
         }
         Users newUser = new Users();
 
         newUser.setId(1);
-        newUser.setName(newUserInfo.getName());
         newUser.setEmail(newUserInfo.getEmail());
-        newUser.setDni(newUserInfo.getDni());
         newUser.setPassword(newUserInfo.getPassword());
-        newUser.setPhoneNumber(newUserInfo.getPhoneNumber());
-        newUser.setAddress(newUserInfo.getAddress());
         newUser.setIsActive(true);
 
         Optional<LevelAccess> levelAccess = levelAccessRepo.findByAccessCode(2);
@@ -74,9 +66,8 @@ public class UserServiceImpl implements UserService{
 
         Optional<Users> user = userRepo.findByEmailAndPassword(loginInfo.getEmail(),loginInfo.getPassword());
         if(user.isPresent()){
-            String username = user.get().getName();
             String email = user.get().getEmail();
-            return new String[]{email,username};
+            return new String[]{email,null};
         }else{
             throw  new Exception(user.toString());
         }

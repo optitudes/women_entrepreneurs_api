@@ -17,14 +17,9 @@ public interface UserRepo extends JpaRepository<Users, Integer> {
 
     Optional<Users> findByEmail(String email);
 
-    Optional<Users> findByDni(String dni);
-
     Page<Users> findAll(Pageable pageable);
 
     Optional<Users> findByEmailAndIsActive(String email, boolean isActive);
-
-    @Query("select u from Users u where u.name like %:patron%")
-    List<Users> buscarPatronNombre(String patron);
 
 
 

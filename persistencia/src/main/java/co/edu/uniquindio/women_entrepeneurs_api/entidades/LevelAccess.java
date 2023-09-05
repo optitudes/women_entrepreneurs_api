@@ -4,8 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Setter
@@ -25,6 +28,14 @@ public class LevelAccess implements Serializable {
     @Column(name="description", length=100,nullable = false)
     private String description;
 
+    @Column(name="deleted_at")
+    private LocalDateTime deletedAt;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

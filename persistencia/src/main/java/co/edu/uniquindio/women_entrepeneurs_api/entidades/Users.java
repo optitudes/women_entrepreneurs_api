@@ -5,8 +5,11 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Setter
@@ -24,23 +27,25 @@ public class Users implements Serializable {
     @Column(name="email", length=50,unique=true,nullable = false)
     private String email;
 
-    @Column(name="name", length=45,nullable = false)
-    private String name;
     @Column(name="password",length=45,nullable = false)
     private String password;
-
-    @Column(name="dni",length=20,unique=true,nullable = false)
-    private String dni;
-
-    @Column(name="phone_number", length=15)
-    private Integer phoneNumber;
-
-    @Column(name="address", length=45,nullable = false)
-    private String address;
 
     @Column(name="is_active",nullable = false)
     private Boolean isActive;
 
+    @Column(name="password_reset_token")
+    private Boolean passwordResetToken;
+
+    @Column(name="email_verified_at")
+    private LocalDateTime emailVerifiedAt;
+
+    @Column(name="deleted_at")
+    private LocalDateTime deletedAt;
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

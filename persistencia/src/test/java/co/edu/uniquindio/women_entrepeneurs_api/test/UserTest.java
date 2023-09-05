@@ -33,16 +33,12 @@ public class UserTest {
 
         String email = "pablo@gmail.com";
         String password = "rootie";
-        String dni = "119112114";
-        Integer phoneNumber = 323323323;
-        String address = "calarca";
         boolean isActive = true;
-        String name = "pablo";
 
-        Users user = new Users(1,email,name,password,dni,phoneNumber,address,isActive,null,null,null,null,null,null);
+        Users user = new Users(1,email,password,isActive,null,null,null,null,null,null);
 
         Users usuarioGuardado = userRepo.save(user);
-        Assertions.assertEquals("pablo", usuarioGuardado.getName());
+        Assertions.assertEquals("pablo@gmail.com", usuarioGuardado.getEmail());
         System.out.println(usuarioGuardado);
     }
 
@@ -51,11 +47,11 @@ public class UserTest {
     public void updateTest(){
         Optional<Users> user = userRepo.findById(1);
         if(user.isPresent()){
-            user.get().setName("dahiana");
+            user.get().setEmail("dahiana@gmail.com");
             userRepo.save(user.get());
             Optional<Users> userUpdated = userRepo.findById(1);
             if(userUpdated.isPresent()){
-                Assertions.assertEquals("dahiana", user.get().getName());
+                Assertions.assertEquals("dahiana@gmail.com", user.get().getEmail());
 
             }else{
                 Assertions.fail("No se encontró el usuario despues de actualizar");
@@ -82,7 +78,7 @@ public class UserTest {
     public void findByEmailAndPasswordTest(){
         Optional<Users> user = userRepo.findByEmailAndPassword("diego@test.com","password");
         if(user.isPresent()){
-            Assertions.assertEquals("diego", user.get().getName());
+            Assertions.assertEquals("diego@test.com", user.get().getEmail());
         }else {
             Assertions.fail("No se encontró el usuario");
         }
