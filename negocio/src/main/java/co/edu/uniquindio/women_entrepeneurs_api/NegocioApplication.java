@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @SpringBootApplication
-
 public class NegocioApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
 
