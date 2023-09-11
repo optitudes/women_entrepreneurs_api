@@ -41,6 +41,8 @@ public class Venture implements Serializable {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+    @Column(name="deleted_at")
+    private LocalDateTime deletedAt;
 
     @Override
     public boolean equals(Object o) {

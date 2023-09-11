@@ -30,7 +30,8 @@ public class Video implements Serializable {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
+    @Column(name="deleted_at")
+    private LocalDateTime deletedAt;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
