@@ -12,7 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Location_site implements Serializable {
+public class LocationSite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,7 +41,7 @@ public class Location_site implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Location_site that = (Location_site) o;
+        LocationSite that = (LocationSite) o;
         return Objects.equals(id, that.id);
     }
 

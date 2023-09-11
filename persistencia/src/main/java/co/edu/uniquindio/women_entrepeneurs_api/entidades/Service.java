@@ -9,25 +9,29 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-@Entity
-@ToString
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Itineray implements Serializable {
-
+@ToString
+@Entity
+public class Service implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "price", nullable = false)
+    private String price;
+
+    @Column(name="is_active",nullable = false)
+    private Boolean isActive;
 
     @Column(name="deleted_at")
     private LocalDateTime deletedAt;
@@ -36,17 +40,19 @@ public class Itineray implements Serializable {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Itineray itineray = (Itineray) o;
-        return Objects.equals(id, itineray.id);
+
+        Service service = (Service) o;
+
+        return Objects.equals(id, service.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return id != null ? id.hashCode() : 0;
     }
+
 }

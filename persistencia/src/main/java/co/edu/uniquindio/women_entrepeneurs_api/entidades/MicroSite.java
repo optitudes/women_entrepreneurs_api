@@ -12,7 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Micro_site implements Serializable {
+public class MicroSite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,15 +25,6 @@ public class Micro_site implements Serializable {
     @Column(name = "descriptio", nullable = true, length = 100)
     private String description;
 
-    /* Preguntar si productos y servicios puede ser una clase aparte
-       Con sus atributos como nombre, descripción, precio, etc
-     */
-    @Column(name = "products")
-    private String products;
-
-    @Column(name = "services")
-    private String services;
-
     @Column(name = "address", nullable = true)
     private String address;
 
@@ -44,7 +35,7 @@ public class Micro_site implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Micro_site microSite = (Micro_site) o;
+        MicroSite microSite = (MicroSite) o;
         return Objects.equals(id, microSite.id);
     }
 

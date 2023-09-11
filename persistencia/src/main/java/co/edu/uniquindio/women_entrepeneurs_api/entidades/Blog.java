@@ -2,6 +2,7 @@ package co.edu.uniquindio.women_entrepeneurs_api.entidades;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,8 +28,13 @@ public class Blog implements Serializable {
     @Column(name = "content")
     private String content;
 
+    @Column(name="deleted_at")
+    private LocalDateTime deletedAt;
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {
