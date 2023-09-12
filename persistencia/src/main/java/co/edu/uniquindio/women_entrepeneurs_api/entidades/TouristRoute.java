@@ -57,4 +57,7 @@ public class TouristRoute implements Serializable {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+    @OneToOne(mappedBy="touristRoute")
+    private Itinerary itinerary;
 }

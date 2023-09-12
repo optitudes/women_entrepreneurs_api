@@ -5,9 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -60,4 +59,12 @@ public class Profile implements Serializable {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+    @OneToOne
+    private User user;
+
+    @OneToMany(mappedBy="profile")
+    private List<Review> reviewList;
+
+
 }

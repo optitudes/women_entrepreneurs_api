@@ -19,7 +19,7 @@ public class LevelAccessTest {
 
     @Test
     public void create(){
-        LevelAccess levelAccess = new LevelAccess(1,3,"prueba",null);
+        LevelAccess levelAccess = new LevelAccess(1,233,"prueba",null,null,null,null);
         LevelAccess levelAccessSaved = levelAccessRepo.save(levelAccess);
         Assertions.assertEquals("prueba", levelAccessSaved.getDescription());
     }

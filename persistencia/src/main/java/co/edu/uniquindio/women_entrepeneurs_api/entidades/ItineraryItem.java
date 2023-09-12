@@ -53,4 +53,8 @@ public class ItineraryItem implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
+    @ManyToOne
+    private Itinerary itinerary;
+
+
 }

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -16,7 +17,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Itineray implements Serializable {
+public class Itinerary implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,12 +42,19 @@ public class Itineray implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Itineray itineray = (Itineray) o;
-        return Objects.equals(id, itineray.id);
+        Itinerary itinerary = (Itinerary) o;
+        return Objects.equals(id, itinerary.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @OneToMany(mappedBy="itinerary")
+    private List<ItineraryItem> itineraryItemList;
+
+    @OneToOne
+    private TouristRoute touristRoute;
+
 }

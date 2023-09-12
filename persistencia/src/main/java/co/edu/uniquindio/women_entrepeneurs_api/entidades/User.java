@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,8 +16,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "users")
-public class Users implements Serializable {
+@Table(name = "user")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -51,7 +50,7 @@ public class Users implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Users user = (Users) o;
+        User user = (User) o;
 
         return Objects.equals(id, user.id);
     }
@@ -65,5 +64,15 @@ public class Users implements Serializable {
     @ManyToOne
     @NotNull
     private LevelAccess levelAccess;
+
+    @OneToOne(mappedBy="user")
+    private Profile profile;
+
+    @OneToOne(mappedBy="user")
+    private Venture venture;
+
+
+
+
 
 }

@@ -3,7 +3,7 @@ package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginRequestDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.LevelAccess;
-import co.edu.uniquindio.women_entrepeneurs_api.entidades.Users;
+import co.edu.uniquindio.women_entrepeneurs_api.entidades.User;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.LevelAccessRepo;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.UserRepo;
 import org.springframework.stereotype.Service;
@@ -26,11 +26,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean registerUser(UserRegisterDTO newUserInfo) throws Exception {
 
-        Optional<Users> searched = userRepo.findByEmail(newUserInfo.getEmail());
+        Optional<User> searched = userRepo.findByEmail(newUserInfo.getEmail());
         if (searched.isPresent()){
             throw new Exception("El correo del usuario ya existe");
         }
-        Users newUser = new Users();
+        User newUser = new User();
 
         newUser.setId(1);
         newUser.setEmail(newUserInfo.getEmail());
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Users updateUser(Users u) throws Exception {
+    public User updateUser(User u) throws Exception {
         return userRepo.save(u);
     }
 
@@ -57,14 +57,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<Users> listUsers() {
+    public List<User> listUsers() {
         return userRepo.findAll();
     }
 
     @Override
     public String[] login(LoginRequestDTO loginInfo) throws Exception {
 
-        Optional<Users> user = userRepo.findByEmailAndPassword(loginInfo.getEmail(),loginInfo.getPassword());
+        Optional<User> user = userRepo.findByEmailAndPassword(loginInfo.getEmail(),loginInfo.getPassword());
         if(user.isPresent()){
             String email = user.get().getEmail();
             return new String[]{email,null};

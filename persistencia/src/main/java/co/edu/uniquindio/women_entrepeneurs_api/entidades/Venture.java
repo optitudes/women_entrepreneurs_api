@@ -59,4 +59,7 @@ public class Venture implements Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
+    @OneToOne
+    private User user;
+
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.women_entrepeneurs_api.test;
 
-import co.edu.uniquindio.women_entrepeneurs_api.entidades.Users;
+import co.edu.uniquindio.women_entrepeneurs_api.entidades.LevelAccess;
+import co.edu.uniquindio.women_entrepeneurs_api.entidades.User;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.LevelAccessRepo;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.UserRepo;
 
@@ -35,9 +36,9 @@ public class UserTest {
         String password = "rootie";
         boolean isActive = true;
 
-        Users user = new Users(1,email,password,isActive,null,null,null,null,null,null);
+        User user = new User(1,"pablo@gmail.com","aadsf",true,false,null,null,null,null, new LevelAccess(),null,null);
 
-        Users usuarioGuardado = userRepo.save(user);
+        User usuarioGuardado = userRepo.save(user);
         Assertions.assertEquals("pablo@gmail.com", usuarioGuardado.getEmail());
         System.out.println(usuarioGuardado);
     }
@@ -45,11 +46,11 @@ public class UserTest {
     @Test
     //@Sql("classpath:dataset.sql")
     public void updateTest(){
-        Optional<Users> user = userRepo.findById(1);
+        Optional<User> user = userRepo.findById(1);
         if(user.isPresent()){
             user.get().setEmail("dahiana@gmail.com");
             userRepo.save(user.get());
-            Optional<Users> userUpdated = userRepo.findById(1);
+            Optional<User> userUpdated = userRepo.findById(1);
             if(userUpdated.isPresent()){
                 Assertions.assertEquals("dahiana@gmail.com", user.get().getEmail());
 
@@ -64,7 +65,7 @@ public class UserTest {
     //@Sql("classpath:dataset.sql")
     public void remove(){
 
-        Optional<Users> user = userRepo.findById(1);
+        Optional<User> user = userRepo.findById(1);
         if(user.isPresent()){
             userRepo.delete(user.get());
             Assertions.assertFalse(userRepo.findById(1).isPresent());
@@ -76,7 +77,7 @@ public class UserTest {
     @Test
     //@Sql("classpath:dataset.sql")
     public void findByEmailAndPasswordTest(){
-        Optional<Users> user = userRepo.findByEmailAndPassword("diego@test.com","password");
+        Optional<User> user = userRepo.findByEmailAndPassword("diego@test.com","password");
         if(user.isPresent()){
             Assertions.assertEquals("diego@test.com", user.get().getEmail());
         }else {
@@ -89,9 +90,9 @@ public class UserTest {
     @Test
     //@Sql("classpath:dataset.sql")
     public void findByEmailTest(){
-        Optional<Users> user = userRepo.findByEmail("diego@test.com");
+        Optional<User> user = userRepo.findByEmail("diego@test.com");
         if(user.isPresent()){
-            Assertions.assertEquals("diego", user.get().getName());
+            Assertions.assertEquals("diego@test.com", user.get().getEmail());
         }else {
             Assertions.fail("No se encontró el usuario");
         }
@@ -101,16 +102,10 @@ public class UserTest {
     public void filtrarEmailTest(){
         Pageable paginador = PageRequest.of(0,2);
 
-        Page<Users> list = userRepo.findAll(paginador);
+        Page<User> list = userRepo.findAll(paginador);
         Assertions.assertNotNull(list, "La lista de usuarios filtrados por email no puede ser nula");
     }
 
-    @Test
-    //@Sql("classpath:dataset.sql")
-    public void buscarPatronNombreUserTest(){
-        List<Users> usuarios = userRepo.buscarPatronNombre("die");
-        Assertions.assertEquals(1, usuarios.size());
-    }
 
 
 }

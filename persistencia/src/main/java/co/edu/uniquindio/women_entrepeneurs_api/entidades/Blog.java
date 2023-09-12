@@ -36,6 +36,7 @@ public class Blog implements Serializable {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,4 +49,7 @@ public class Blog implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @ManyToOne
+    private BlogCategory blogCategory;
 }
