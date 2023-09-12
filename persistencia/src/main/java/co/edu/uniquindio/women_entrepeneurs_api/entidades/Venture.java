@@ -62,4 +62,7 @@ public class Venture implements Serializable {
     @OneToOne
     private User user;
 
+    @OneToOne(mappedBy="venture")
+    private MicroSite microSite;
+
 }

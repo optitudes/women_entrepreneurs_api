@@ -46,4 +46,7 @@ public class Video implements Serializable {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+    @ManyToOne
+    private MicroSite microSite;
 }

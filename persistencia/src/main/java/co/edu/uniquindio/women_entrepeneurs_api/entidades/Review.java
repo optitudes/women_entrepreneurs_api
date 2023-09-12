@@ -56,5 +56,7 @@ public class Review  implements Serializable {
 
     @ManyToOne
     private Profile profile;
+    @ManyToOne
+    private TouristRoute touristRoute;
 
 }

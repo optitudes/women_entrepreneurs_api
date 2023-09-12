@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -60,4 +61,10 @@ public class TouristRoute implements Serializable {
 
     @OneToOne(mappedBy="touristRoute")
     private Itinerary itinerary;
+
+    @OneToMany(mappedBy="touristRoute")
+    private List<Review> reviewList;
+
+    @ManyToOne
+    private MicroSite microSite;
 }

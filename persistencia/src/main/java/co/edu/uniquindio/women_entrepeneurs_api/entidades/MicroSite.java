@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -43,4 +44,14 @@ public class MicroSite implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @OneToMany(mappedBy="microSite")
+    private List<TouristRoute> touristRouteList;
+
+    @OneToOne
+    private Venture venture;
+
+    @OneToMany(mappedBy="microSite")
+    private List<Video> videoList;
+
 }
