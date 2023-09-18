@@ -39,6 +39,9 @@ public class Document implements Serializable {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @ManyToOne
+    private MicroSite microSite;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

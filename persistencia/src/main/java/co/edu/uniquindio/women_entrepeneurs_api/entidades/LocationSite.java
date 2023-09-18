@@ -37,6 +37,9 @@ public class LocationSite implements Serializable {
     @Column(name="map_longitude")
     private Double mapLongitude;
 
+    @ManyToOne
+    private TouristRoute touristRoute;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
