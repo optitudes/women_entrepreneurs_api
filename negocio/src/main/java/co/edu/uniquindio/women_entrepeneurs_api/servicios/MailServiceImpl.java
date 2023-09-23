@@ -8,19 +8,27 @@ import org.springframework.stereotype.Service;
 public class MailServiceImpl {
 
     private final JavaMailSender javaMailSender;
+    private final String from="turismoenlacordillera@test.com";
 
     @Autowired
     public MailServiceImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendEmail() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("sebas@gmail.com");
-        message.setTo("optt.itudes@gmail.com");
-        message.setSubject("Asunto del correo");
-        message.setText("Contenido del correo");
+    public boolean sendSimpleEmail(String email,String subject, String text) {
+        try{
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(this.from);
+            message.setTo(email);
+            message.setSubject(subject);
+            message.setText(text);
 
-        javaMailSender.send(message);
+            javaMailSender.send(message);
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage()+e.getCause());
+            return false;
+        }
+
     }
 }
