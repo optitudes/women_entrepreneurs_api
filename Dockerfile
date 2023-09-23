@@ -12,5 +12,5 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:11
 ARG JAR_FILE=/app/negocio/target/*.jar
 COPY --from=build ${JAR_FILE} app.jar
-EXPOSE ${PORT}
+EXPOSE 80
 ENTRYPOINT ["java","-jar","/app.jar"]
