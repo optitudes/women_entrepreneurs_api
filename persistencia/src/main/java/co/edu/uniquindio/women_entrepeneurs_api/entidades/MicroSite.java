@@ -23,7 +23,7 @@ public class MicroSite implements Serializable {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "descriptio", nullable = true, length = 100)
+    @Column(name = "description", nullable = true, length = 100)
     private String description;
 
     @Column(name = "address", nullable = true)
@@ -31,6 +31,20 @@ public class MicroSite implements Serializable {
 
     @Column(name = "experiences", nullable = true)
     private String experiences;
+
+    @OneToMany(mappedBy = "microSite")
+    private List<Document> documents;
+
+    @OneToMany(mappedBy = "microSite")
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "microSite")
+    private List<Comment> commentsList;
+
+    @OneToMany(mappedBy = "microSite")
+    private List<Blog> blogsList;
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -44,6 +44,13 @@ public class TouristRoute implements Serializable {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "touristRoute")
+    private List<LocationSite> locationSiteList;
+
+    @OneToMany(mappedBy = "touristRoute")
+    private List<Activiy> activiyList;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

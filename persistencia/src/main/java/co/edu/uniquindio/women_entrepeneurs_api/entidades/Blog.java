@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -36,6 +37,11 @@ public class Blog implements Serializable {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @ManyToOne
+    private MicroSite microSite;
+
+    @OneToMany(mappedBy = "blog")
+    private List<Comment> commentList;
 
     @Override
     public boolean equals(Object o) {

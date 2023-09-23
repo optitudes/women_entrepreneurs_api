@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -33,6 +34,13 @@ public class Image implements Serializable {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    //Una imagen solo pertenece a un  micrositio?
+    @ManyToOne
+    private MicroSite microSite;
+
+    @OneToMany(mappedBy = "image")
+    private List<Comment> commentList;
 
     @Override
     public boolean equals(Object o) {

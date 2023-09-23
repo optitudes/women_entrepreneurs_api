@@ -28,6 +28,9 @@ public class Activiy implements Serializable {
     @Column(name = "cost", nullable = false)
     private Double cost;
 
+    @ManyToOne
+    private TouristRoute touristRoute;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

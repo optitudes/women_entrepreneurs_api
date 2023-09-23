@@ -37,6 +37,18 @@ public class Comment implements Serializable {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @ManyToOne
+    private MicroSite microSite;
+
+    @ManyToOne
+    private Blog blog;
+
+    @ManyToOne
+    private Video video;
+
+    @ManyToOne
+    private Image image;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
