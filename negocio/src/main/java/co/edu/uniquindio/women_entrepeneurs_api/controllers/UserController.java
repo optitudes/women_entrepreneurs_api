@@ -1,18 +1,14 @@
 package co.edu.uniquindio.women_entrepeneurs_api.controllers;
 
-import co.edu.uniquindio.women_entrepeneurs_api.dto.BillDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.MessageDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
-import co.edu.uniquindio.women_entrepeneurs_api.security.TokenUtils;
 import co.edu.uniquindio.women_entrepeneurs_api.servicios.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor

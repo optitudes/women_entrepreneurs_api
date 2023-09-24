@@ -15,6 +15,10 @@ public class UserRegisterDTO {
     private String email;
     @NotNull
     private String password;
-    @Nullable
-    private Integer phoneNumber;
+    @NotNull
+    private String idNumber;
+    @NotNull
+    private String names;
+    @NotNull
+    private String lastNames;
 }

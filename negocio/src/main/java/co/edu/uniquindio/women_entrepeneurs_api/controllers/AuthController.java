@@ -10,14 +10,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.GrantedAuthority;
-
-import org.springframework.mail.javamail.JavaMailSender;
-
-
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -31,12 +26,8 @@ public class AuthController {
     private final UserServiceImpl userServiceImpl;
     private final MailServiceImpl mailService;
 
-
-
     @PostMapping("/login")
     public ResponseEntity<MessageDTO> login(@Valid @RequestBody LoginRequestDTO loginInfo){
-
-        //mailService.sendEmail();
         try {
             String[] userInfo = userServiceImpl.login(loginInfo);
             String token = getJWTToken(userInfo[0]);

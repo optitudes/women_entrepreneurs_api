@@ -33,6 +33,9 @@ public class Profile implements Serializable {
     @Column(name="phone_number", length=15)
     private Integer phoneNumber;
 
+    @Column(name="id_number", length=30, unique = true)
+    private String idNumber;
+
     @Column(name="address", length=45,nullable = true)
     private String address;
 

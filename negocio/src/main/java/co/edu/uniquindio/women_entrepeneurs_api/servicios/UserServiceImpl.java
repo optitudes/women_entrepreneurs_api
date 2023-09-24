@@ -3,9 +3,12 @@ package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginRequestDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.LevelAccess;
+import co.edu.uniquindio.women_entrepeneurs_api.entidades.Profile;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.User;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.LevelAccessRepo;
+import co.edu.uniquindio.women_entrepeneurs_api.repo.ProfileRepo;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.UserRepo;
+import co.edu.uniquindio.women_entrepeneurs_api.security.TokenUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +18,17 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService{
 
     private final UserRepo userRepo;
+    private final ProfileRepo profileRepo;
+
     private final LevelAccessRepo levelAccessRepo;
+    private  MailServiceImpl mailService;
 
 
-    public UserServiceImpl(UserRepo userRepo, LevelAccessRepo levelAccessRepo) {
+    public UserServiceImpl(UserRepo userRepo, LevelAccessRepo levelAccessRepo,ProfileRepo profileRepo, MailServiceImpl mailService) {
         this.userRepo = userRepo;
         this.levelAccessRepo = levelAccessRepo;
+        this.profileRepo = profileRepo;
+        this.mailService = mailService;
     }
 
     @Override
@@ -30,17 +38,30 @@ public class UserServiceImpl implements UserService{
         if (searched.isPresent()){
             throw new Exception("El correo del usuario ya existe");
         }
-        User newUser = new User();
+        Optional<Profile> profileSearched = profileRepo.findByIdNumber(newUserInfo.getIdNumber());
+        if (profileSearched.isPresent()){
+            throw new Exception("La identificacion de usuario ya existe");
+        }
 
-        newUser.setId(1);
+        User newUser = new User();
         newUser.setEmail(newUserInfo.getEmail());
         newUser.setPassword(newUserInfo.getPassword());
         newUser.setIsActive(true);
 
+        Profile newProfile = new Profile();
+        newProfile.setIdNumber(newUserInfo.getIdNumber());
+        newProfile.setNames(newUserInfo.getNames());
+        newProfile.setLastNames(newUserInfo.getLastNames());
+        newProfile.setUser(newUser);
+
+
         Optional<LevelAccess> levelAccess = levelAccessRepo.findByAccessCode(2);
         if (levelAccess.isPresent()){
             newUser.setLevelAccess(levelAccess.get());
-            return userRepo.save(newUser) != null;
+            userRepo.save(newUser);
+            profileRepo.save(newProfile);
+            mailService.sendEmailVerification(newUser.getEmail(),newProfile.getNames(), TokenUtils.encriptAES(newUser.getEmail()));
+            return  true ;
         }else{
             throw new Exception("Ocurrió un error al asignar el nivel de acceso");
         }
