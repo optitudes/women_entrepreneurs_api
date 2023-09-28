@@ -1,6 +1,7 @@
 package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginRequestDTO;
+import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginResponseDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.LevelAccess;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.User;
@@ -62,14 +63,39 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String[] login(LoginRequestDTO loginInfo) throws Exception {
+    public LoginResponseDTO login(LoginRequestDTO loginInfo) throws Exception {
 
-        Optional<User> user = userRepo.findByEmailAndPassword(loginInfo.getEmail(),loginInfo.getPassword());
-        if(user.isPresent()){
+        Optional<User> user = userRepo.findByIdNumber(loginInfo.getIdNumber());
+
+        if (user.isEmpty()) {
+            throw new Exception("Usuario no existe");
+        }
+
+        User foundUser = user.get();
+        validateUser(foundUser, loginInfo.getPassword());
+
+        LoginResponseDTO responseDTO = new LoginResponseDTO(null,user.get().getEmail(),null);
+
+        return responseDTO;
+
+       /* if(user.isPresent()){
             String email = user.get().getEmail();
             return new String[]{email,null};
         }else{
             throw  new Exception(user.toString());
+        }*/
+    }
+    private void validateUser(User user, String password) throws Exception {
+        if (!user.getIsActive()) {
+            throw new Exception("Usuario no está activo");
+        }
+
+        if (user.getEmailVerifiedAt() == null) {
+            throw new Exception("El usuario no cuenta con correo electrónico verificado");
+        }
+
+        if (!user.getPassword().equals(password)) {
+            throw new Exception("Contraseña incorrecta");
         }
     }
 

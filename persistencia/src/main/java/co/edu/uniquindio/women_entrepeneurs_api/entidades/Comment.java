@@ -26,7 +26,7 @@ public class Comment implements Serializable {
     @Column(name = "title", nullable = false, length = 100)
     private String title;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "content", nullable = false)
     private String content;
 
     @Column(name="deleted_at")

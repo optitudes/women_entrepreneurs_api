@@ -22,8 +22,12 @@ public class Profile implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name="idNumber", length = 45, nullable = false, unique = true)
+    private String idNumber;
+
     @Column(name="names", length=60,nullable = false)
     private String names;
+
     @Column(name="last_names", length=60,nullable = false)
     private String lastNames;
 
