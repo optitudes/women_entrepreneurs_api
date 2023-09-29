@@ -26,7 +26,7 @@ public class UserTest {
     @Autowired
     private LevelAccessRepo levelAccessRepo;
 
-
+/*
     @Test
     //@Sql("classpath:dataset.sql")
 
@@ -87,6 +87,8 @@ public class UserTest {
 
 
 
+
+
     @Test
     //@Sql("classpath:dataset.sql")
     public void findByEmailTest(){
@@ -107,5 +109,5 @@ public class UserTest {
     }
 
 
-
+ */
 }

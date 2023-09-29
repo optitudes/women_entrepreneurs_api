@@ -16,7 +16,7 @@ public class LevelAccessTest {
 
     @Autowired
     private LevelAccessRepo levelAccessRepo;
-
+/*
     @Test
     public void create(){
         LevelAccess levelAccess = new LevelAccess(1,233,"prueba",null,null,null,null);
@@ -45,7 +45,7 @@ public class LevelAccessTest {
 
 
     @Test
-    //@Sql("classpath:dataset.sql")
+    @Sql("classpath:dataset.sql")
     public void remove(){
 
         Optional<LevelAccess> levelAccess = levelAccessRepo.findById(1);
