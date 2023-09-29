@@ -29,11 +29,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<MessageDTO> login(@Valid @RequestBody LoginRequestDTO loginInfo){
         try {
-            String[] userInfo = userServiceImpl.login(loginInfo);
-            String token = getJWTToken(userInfo[0]);
-            LoginResponseDTO loginResponse = new LoginResponseDTO(token,userInfo[0],userInfo[1]);
+            LoginResponseDTO userInfo = userServiceImpl.login(loginInfo);
+            String token = getJWTToken(userInfo.getEmail());
+            userInfo.setToken(token);
 
-            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso",loginResponse ));
+            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso",userInfo ));
 
         } catch (Exception e) {
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error",e.getMessage() ));

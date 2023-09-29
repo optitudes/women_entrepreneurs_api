@@ -22,8 +22,12 @@ public class Profile implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name="idNumber", length = 45, nullable = false, unique = true)
+    private String idNumber;
+
     @Column(name="names", length=60,nullable = false)
     private String names;
+
     @Column(name="last_names", length=60,nullable = false)
     private String lastNames;
 
@@ -32,9 +36,6 @@ public class Profile implements Serializable {
 
     @Column(name="phone_number", length=15)
     private Integer phoneNumber;
-
-    @Column(name="id_number", length=30, unique = true)
-    private String idNumber;
 
     @Column(name="address", length=45,nullable = true)
     private String address;

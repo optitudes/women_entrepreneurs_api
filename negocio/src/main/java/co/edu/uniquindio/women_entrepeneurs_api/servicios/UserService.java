@@ -1,6 +1,7 @@
 package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginRequestDTO;
+import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginResponseDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.User;
 
@@ -15,5 +16,5 @@ public interface UserService {
     void deleteUser(int id)throws Exception;
     List<User> listUsers() throws Exception;
 
-    String[] login(LoginRequestDTO loginInfo) throws Exception;
+    LoginResponseDTO login(LoginRequestDTO loginInfo) throws Exception;
 }
