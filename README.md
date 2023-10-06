@@ -7,8 +7,7 @@ Turismo en la cordillera es un proyecto el cual tiene como objetivo desarrollar 
 Este proyecto se divide en dos repositorios, en este repositorio se encuentra la parte correspondiente a la API.
 ## 📄Tabla de contenido
 
--
-- [Tecnologías Utilizadas](#Tecnologías utilizadas)
+- [Tecnologías Utilizadas](#Tecnologías Utilizadas)
 - [Instalación](#Instalación)
 - [Front Repositorio](#FrontRepositoro)
 - [Equipo de Desarrollo](#Equipo de Desarrollo)
