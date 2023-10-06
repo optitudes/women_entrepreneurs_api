@@ -7,10 +7,10 @@ Turismo en la cordillera es un proyecto el cual tiene como objetivo desarrollar 
 Este proyecto se divide en dos repositorios, en este repositorio se encuentra la parte correspondiente a la API.
 ## 📄Tabla de contenido
 
-- [Tecnologías Utilizadas](#Tecnologías Utilizadas)
-- [Instalación](#Instalación)
-- [Front Repositorio](#FrontRepositoro)
-- [Equipo de Desarrollo](#Equipo de Desarrollo)
+- [Tecnologías Utilizadas](#-tecnologías-utilizadas-)
+- [Instalación](#-instalación)
+- [Front Repositorio](#-FrontRepositoro)
+- [Front Repositorio](#-equipo-de-desarrollo)
 
 
 ## ✅ Tecnologías Utilizadas 
@@ -41,7 +41,7 @@ cd women_entrepreneurs_api
 mvn clean install
    ```
 
-# 🖼️Front Repositorio
+# 🖼️ Front Repositorio
 
 
 --  [Aquí encontrará el repositorio del Front](https://github.com/johanOA/turismo_frontend/blob/develop/README.md) --
