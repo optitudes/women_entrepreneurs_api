@@ -30,6 +30,7 @@ public class NegocioApplication extends SpringBootServletInitializer {
                     .authorizeRequests()
 
                     .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                    .antMatchers(HttpMethod.POST, "/api/auth/test").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/product/search/{pattern}").permitAll()
 

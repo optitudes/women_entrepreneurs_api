@@ -245,7 +245,6 @@ public class MailServiceImpl {
                 "\t\t\t\t\t\t    <div style=\"text-align: center;\"><span style=\"font-family:verdana,geneva,sans-serif\"><span style=\"font-size:18px\"><strong></strong></span></span><br>\n" +
                 "\t\t\t\t\t\t\t&nbsp;</div>\n" +
                 "\n" +
-                "\t\t\t\t\t\t    <div><span style=\"font-family:verdana,geneva,sans-serif\">Link de validación</span></div>\n" +
                 "\n" +
                 "                                                </td>\n" +
                 "                                            </tr>\n" +

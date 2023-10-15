@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/auth")
+@CrossOrigin
 public class AuthController {
 
     private final UserServiceImpl userServiceImpl;
@@ -32,12 +33,17 @@ public class AuthController {
             LoginResponseDTO userInfo = userServiceImpl.login(loginInfo);
             String token = getJWTToken(userInfo.getEmail());
             userInfo.setToken(token);
-
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso",userInfo ));
 
         } catch (Exception e) {
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error",e.getMessage() ));
         }
+
+    }
+    @PostMapping("/test")
+    public ResponseEntity<MessageDTO> test(){
+
+            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso",new LoginResponseDTO("token","email","name") ));
 
     }
 
