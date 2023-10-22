@@ -9,6 +9,8 @@ import org.springframework.lang.Nullable;
 public class LoginResponseDTO {
     private String token;
     private String email;
+    private Integer accessCode;
+    private String accessDescription;
     @Nullable
     private String username;
 }

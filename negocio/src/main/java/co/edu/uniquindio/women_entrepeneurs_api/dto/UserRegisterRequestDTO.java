@@ -1,5 +1,6 @@
 package co.edu.uniquindio.women_entrepeneurs_api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,19 +11,12 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRegisterDTO {
+public class UserRegisterRequestDTO {
+    @JsonProperty("userInfo")
     @NotNull
-    private String email;
-    @NotNull
-    private String password;
-    @NotNull
-    private String idNumber;
-    @NotNull
-    private String names;
-    @NotNull
-    private String lastNames;
+    private UserRegisterDTO user;
+
+    @JsonProperty("microSite")
     @Nullable
-    private String address;
-    @Nullable
-    private String phoneNumber;
+    private MicrositeRegisterDTO microsite;
 }

@@ -36,14 +36,14 @@ public class AuthController {
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso",userInfo ));
 
         } catch (Exception e) {
-            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error",e.getMessage() ));
+            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error\n"+e.getMessage(),null ));
         }
 
     }
     @PostMapping("/test")
     public ResponseEntity<MessageDTO> test(){
 
-            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso",new LoginResponseDTO("token","email","name") ));
+            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso","test data" ));
 
     }
 

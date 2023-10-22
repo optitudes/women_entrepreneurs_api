@@ -35,14 +35,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean registerUser(UserRegisterDTO newUserInfo) throws Exception {
 
-        Optional<User> searched = userRepo.findByEmail(newUserInfo.getEmail());
-        if (searched.isPresent()){
-            throw new Exception("El correo del usuario ya existe");
-        }
-        Optional<Profile> profileSearched = profileRepo.findByIdNumber(newUserInfo.getIdNumber());
-        if (profileSearched.isPresent()){
-            throw new Exception("La identificacion de usuario ya existe");
-        }
+        validateUserRegisterDTO(newUserInfo);
 
         User newUser = new User();
         newUser.setEmail(newUserInfo.getEmail());
@@ -58,7 +51,7 @@ public class UserServiceImpl implements UserService{
 
         Optional<LevelAccess> levelAccess = levelAccessRepo.findByAccessCode(2);
         if (levelAccess.isPresent()){
-            newUser.setLevelAccess(levelAccess.get());
+            newUser.setLevelAccess(levelAccess.get()) ;
             userRepo.save(newUser);
             profileRepo.save(newProfile);
             mailService.sendEmailVerification(newUser.getEmail(),newProfile.getNames(), TokenUtils.encriptAES(newUser.getEmail()));
@@ -95,16 +88,14 @@ public class UserServiceImpl implements UserService{
         User foundUser = user.get();
         validateUser(foundUser, loginInfo.getPassword());
 
-        LoginResponseDTO responseDTO = new LoginResponseDTO(null,user.get().getEmail(),null);
+        String userName = foundUser.getProfile().getNames();
+        String userEmail = foundUser.getEmail();
+        Integer accessCode = foundUser.getLevelAccess().getAccessCode();
+        String  accessDescription = foundUser.getLevelAccess().getDescription();
+
+        LoginResponseDTO responseDTO = new LoginResponseDTO(null,userEmail,accessCode,accessDescription,userName);
 
         return responseDTO;
-
-       /* if(user.isPresent()){
-            String email = user.get().getEmail();
-            return new String[]{email,null};
-        }else{
-            throw  new Exception(user.toString());
-        }*/
     }
     private void validateUser(User user, String password) throws Exception {
         if (!user.getIsActive()) {
@@ -117,6 +108,16 @@ public class UserServiceImpl implements UserService{
 
         if (!user.getPassword().equals(password)) {
             throw new Exception("Contraseña incorrecta");
+        }
+    }
+    public void validateUserRegisterDTO(UserRegisterDTO userRegister) throws Exception {
+        Optional<User> searched = userRepo.findByEmail(userRegister.getEmail());
+        if (searched.isPresent()){
+            throw new Exception("El correo del usuario ya existe");
+        }
+        Optional<Profile> profileSearched = profileRepo.findByIdNumber(userRegister.getIdNumber());
+        if (profileSearched.isPresent()){
+            throw new Exception("La identificacion de usuario ya existe");
         }
     }
 

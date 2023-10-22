@@ -43,6 +43,8 @@ public class Venture implements Serializable {
     private LocalDateTime updatedAt;
     @Column(name="deleted_at")
     private LocalDateTime deletedAt;
+    @Column(name="is_active",nullable = false)
+    private Boolean isActive;
 
     @Override
     public boolean equals(Object o) {

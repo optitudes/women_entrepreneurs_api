@@ -14,6 +14,7 @@ public interface UserService {
     User updateUser(User u) throws Exception;
 
     void deleteUser(int id)throws Exception;
+    void validateUserRegisterDTO(UserRegisterDTO user) throws Exception;
     List<User> listUsers() throws Exception;
 
     LoginResponseDTO login(LoginRequestDTO loginInfo) throws Exception;
