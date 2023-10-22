@@ -27,14 +27,6 @@ public class TouristRoute implements Serializable {
 
     @Column(name="description")
     private String description;
-    @Column(name="map_image")
-    private String mapImage;
-
-    @Column(name="map_latitude")
-    private Double mapLatitude;
-
-    @Column(name="map_longitude")
-    private Double mapLongitude;
 
     @Column(name="deleted_at")
     private LocalDateTime deletedAt;
@@ -50,6 +42,8 @@ public class TouristRoute implements Serializable {
 
     @OneToMany(mappedBy = "touristRoute")
     private List<Activiy> activiyList;
+
+
 
     @Override
     public boolean equals(Object o) {

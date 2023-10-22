@@ -40,6 +40,9 @@ public class LocationSite implements Serializable {
     @ManyToOne
     private TouristRoute touristRoute;
 
+    @ManyToOne
+    private Map map;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
