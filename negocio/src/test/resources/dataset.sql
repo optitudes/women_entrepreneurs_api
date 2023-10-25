@@ -36,11 +36,11 @@ VALUES
 --Datos de prueba para la tabla: image
 INSERT INTO image (id, created_at, deleted_at, url, updated_at, micro_site_id)
 VALUES
-    (1, NOW(), NULL, 'https://example.com/image1.jpg', NULL, 1),
-    (2, NOW(), NULL, 'https://example.com/image2.jpg', NULL, 2),
-    (3, NOW(), NULL, 'https://example.com/image3.jpg', NULL, 3),
-    (4, NOW(), NULL, 'https://example.com/image4.jpg', NULL, 4),
-    (5, NOW(), NULL, 'https://example.com/image5.jpg', NULL, 5);
+    (1, NOW(), NULL, 'https://cdn.pixabay.com/photo/2013/01/05/21/29/south-america-74073_1280.jpg', NULL, 1),
+    (2, NOW(), NULL, 'https://cdn.pixabay.com/photo/2013/01/05/21/29/south-america-74073_1280.jpg', NULL, 2),
+    (3, NOW(), NULL, 'https://cdn.pixabay.com/photo/2013/01/05/21/29/south-america-74073_1280.jpg', NULL, 3),
+    (4, NOW(), NULL, 'https://cdn.pixabay.com/photo/2013/01/05/21/29/south-america-74073_1280.jpg', NULL, 4),
+    (5, NOW(), NULL, 'https://cdn.pixabay.com/photo/2013/01/05/21/29/south-america-74073_1280.jpg', NULL, 5);
 
 --Datos de prueba para la tabla: itinerary
 INSERT INTO itinerary (id, tourist_route_id, name, description)
