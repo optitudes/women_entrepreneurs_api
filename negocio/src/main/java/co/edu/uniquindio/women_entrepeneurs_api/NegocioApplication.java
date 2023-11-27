@@ -41,14 +41,14 @@ public class NegocioApplication extends SpringBootServletInitializer {
                     .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
                     //rutas relacionadas a la informacion de la app
-                    .antMatchers(HttpMethod.POST, "/api/appinfo/general/**").authenticated()
-                    .antMatchers(HttpMethod.POST, "/api/appinfo/root/**").hasAuthority("ROLE_ROOT")
-                    .antMatchers(HttpMethod.POST, "/api/appinfo/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")
+                    .antMatchers("/api/appinfo/general/**").authenticated()
+                    .antMatchers( "/api/appinfo/root/**").hasAuthority("ROLE_ROOT")
+                    .antMatchers( "/api/appinfo/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")
                     //rutas relacionadas a usuarios
-                    .antMatchers(HttpMethod.POST, "/api/user/general/**").authenticated()
-                    .antMatchers(HttpMethod.POST, "/api/user/root/**").hasAuthority("ROLE_ROOT")
-                    .antMatchers(HttpMethod.POST, "/api/user/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")
-                    .antMatchers(HttpMethod.POST, "/api/user/entrepreneurs/**").hasAnyAuthority("ROLE_EMPRENDEDOR","ROLE_ROOT")
+                    .antMatchers( "/api/user/general/**").authenticated()
+                    .antMatchers( "/api/user/root/**").hasAuthority("ROLE_ROOT")
+                    .antMatchers( "/api/user/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")
+                    .antMatchers( "/api/user/entrepreneurs/**").hasAnyAuthority("ROLE_EMPRENDEDOR","ROLE_ROOT")
 
                     .antMatchers(HttpMethod.GET, "/api/product/search/{pattern}").permitAll()
                     .anyRequest().authenticated()
