@@ -7,6 +7,7 @@ import co.edu.uniquindio.women_entrepeneurs_api.servicios.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,5 +41,25 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error\n"+e.getMessage(),null ));
         }
+    }
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_ROOT')")
+    @PostMapping("/testadmin")
+    public ResponseEntity<MessageDTO> testadmin(){
+
+        return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"test exitoso admin","test data" ));
+
+    }
+    @PreAuthorize("hasRole('ROLE_EMPRENDEDOR') OR hasRole('ROLE_ROOT')")
+    @PostMapping("/testemprendedora")
+    public ResponseEntity<MessageDTO> testemprendedora(){
+
+        return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"test exitoso emprendedora","test data" ));
+
+    }
+    @PostMapping("/testclient")
+    public ResponseEntity<MessageDTO> testclient(){
+
+        return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"test exitoso client","test data" ));
+
     }
 }

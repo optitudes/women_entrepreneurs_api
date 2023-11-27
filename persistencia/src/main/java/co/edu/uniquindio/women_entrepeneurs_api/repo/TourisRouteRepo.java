@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TourisRouteRepo extends JpaRepository<TouristRoute, Integer>{
 
-    long countByLocationSiteList_MicroSite(MicroSite microSite);
+    //long countByLocationSiteList_MicroSite(MicroSite microSite);
+    long countByLocationSiteList(MicroSite microsite);
 }

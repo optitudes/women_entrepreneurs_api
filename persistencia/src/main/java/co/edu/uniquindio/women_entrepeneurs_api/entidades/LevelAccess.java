@@ -24,6 +24,8 @@ public class LevelAccess implements Serializable {
 
     @Column(name="access_code",unique=true,nullable = false)
     private Integer accessCode;
+    @Column(name="name",unique = true,nullable = false)
+    private String name;
 
     @Column(name="description", length=100,nullable = false)
     private String description;

@@ -11,6 +11,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,6 +27,7 @@ public class NegocioApplication extends SpringBootServletInitializer {
     }
 
     @EnableWebSecurity
+    @EnableGlobalMethodSecurity(prePostEnabled = true)
     @Configuration
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -37,8 +39,17 @@ public class NegocioApplication extends SpringBootServletInitializer {
                     .authorizeRequests()
 
                     .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-                    .antMatchers(HttpMethod.POST, "/api/auth/test").permitAll()
                     .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
+                    //rutas relacionadas a la informacion de la app
+                    .antMatchers(HttpMethod.POST, "/api/appinfo/general/**").authenticated()
+                    .antMatchers(HttpMethod.POST, "/api/appinfo/root/**").hasAuthority("ROLE_ROOT")
+                    .antMatchers(HttpMethod.POST, "/api/appinfo/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")
+                    //rutas relacionadas a usuarios
+                    .antMatchers(HttpMethod.POST, "/api/user/general/**").authenticated()
+                    .antMatchers(HttpMethod.POST, "/api/user/root/**").hasAuthority("ROLE_ROOT")
+                    .antMatchers(HttpMethod.POST, "/api/user/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")
+                    .antMatchers(HttpMethod.POST, "/api/user/entrepreneurs/**").hasAnyAuthority("ROLE_EMPRENDEDOR","ROLE_ROOT")
+
                     .antMatchers(HttpMethod.GET, "/api/product/search/{pattern}").permitAll()
                     .anyRequest().authenticated()
                     .and()

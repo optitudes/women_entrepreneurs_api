@@ -31,7 +31,7 @@ public class AuthController {
     public ResponseEntity<MessageDTO> login(@Valid @RequestBody LoginRequestDTO loginInfo){
         try {
             LoginResponseDTO userInfo = userServiceImpl.login(loginInfo);
-            String token = getJWTToken(userInfo.getEmail());
+            String token = getJWTToken(userInfo.getEmail(),userInfo.getAccessName());
             userInfo.setToken(token);
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso",userInfo ));
 
@@ -40,18 +40,12 @@ public class AuthController {
         }
 
     }
-    @PostMapping("/test")
-    public ResponseEntity<MessageDTO> test(){
 
-            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"login exitoso","test data" ));
-
-    }
-
-    private String getJWTToken(String email) {
+    private String getJWTToken(String email,String role) {
         String secretKey = "estaEsMiClaveSecretaCon512BitsDeLongitudParaHS512a;lsdkj;alksdj309708d9d9d9n";
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList("ROLE_USER");
+                .commaSeparatedStringToAuthorityList("ROLE_"+role);
 
         String token = Jwts
                 .builder()

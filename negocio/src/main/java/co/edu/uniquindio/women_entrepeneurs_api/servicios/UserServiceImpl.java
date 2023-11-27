@@ -87,13 +87,14 @@ public class UserServiceImpl implements UserService{
 
         User foundUser = user.get();
         validateUser(foundUser, loginInfo.getPassword());
+        LevelAccess levelAccess = foundUser.getLevelAccess();
 
         String userName = foundUser.getProfile().getNames();
         String userEmail = foundUser.getEmail();
-        Integer accessCode = foundUser.getLevelAccess().getAccessCode();
-        String  accessDescription = foundUser.getLevelAccess().getDescription();
-
-        LoginResponseDTO responseDTO = new LoginResponseDTO(null,userEmail,accessCode,accessDescription,userName);
+        Integer accessCode = levelAccess.getAccessCode();
+        String  accessDescription = levelAccess.getDescription();
+        String accessName = levelAccess.getName();
+        LoginResponseDTO responseDTO = new LoginResponseDTO(null,userEmail,accessCode,accessName,accessDescription,userName);
 
         return responseDTO;
     }

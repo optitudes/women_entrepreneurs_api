@@ -42,7 +42,7 @@ public class MircroSiteController {
                 microSiteDTO.setImageUrl(firstImage.getName());
             }
 
-            long count = tourisRouteRepo.countByLocationSiteList_MicroSite(microSite);
+            long count = tourisRouteRepo.countByLocationSiteList(microSite);
             microSiteDTO.setTouristRouteCount(count);
 
             microSiteDTOs.add(microSiteDTO);

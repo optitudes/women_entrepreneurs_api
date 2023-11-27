@@ -34,7 +34,7 @@ public class Profile implements Serializable {
     @Column(name="picture_url",length=45,nullable = true)
     private String picture_url;
 
-    @Column(name="phone_number", length=15)
+    @Column(name="phone_number")
     private Integer phoneNumber;
 
     @Column(name="address", length=45,nullable = true)
