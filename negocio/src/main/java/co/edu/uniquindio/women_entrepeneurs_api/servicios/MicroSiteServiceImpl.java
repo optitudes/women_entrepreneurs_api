@@ -1,11 +1,8 @@
 package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 
 import co.edu.uniquindio.women_entrepeneurs_api.dto.MicrositeRegisterDTO;
-import co.edu.uniquindio.women_entrepeneurs_api.entidades.MicroSite;
-import co.edu.uniquindio.women_entrepeneurs_api.entidades.Venture;
-import co.edu.uniquindio.women_entrepeneurs_api.repo.MicroSiteRepo;
-import co.edu.uniquindio.women_entrepeneurs_api.repo.UserRepo;
-import co.edu.uniquindio.women_entrepeneurs_api.repo.VentureRepo;
+import co.edu.uniquindio.women_entrepeneurs_api.entidades.*;
+import co.edu.uniquindio.women_entrepeneurs_api.repo.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,13 +12,17 @@ public class MicroSiteServiceImpl implements MicroSiteService {
     private final MicroSiteRepo microSiteRepo;
     private final VentureRepo ventureRepo;
     private final UserRepo userRepo;
+    private final ProfileRepo profileRepo;
+    private final MicroSiteSolicitudeRepo solicitudeRepo;
 
 
 
-    public MicroSiteServiceImpl(MicroSiteRepo microSiteRepo, VentureRepo ventureRepo, UserRepo userRepo) {
+    public MicroSiteServiceImpl(MicroSiteRepo microSiteRepo, VentureRepo ventureRepo, UserRepo userRepo, ProfileRepo profileRepo, MicroSiteSolicitudeRepo solicitudeRepo) {
         this.microSiteRepo = microSiteRepo;
         this.ventureRepo = ventureRepo;
         this.userRepo = userRepo;
+        this.profileRepo = profileRepo;
+        this.solicitudeRepo = solicitudeRepo;
     }
 
 
@@ -40,7 +41,9 @@ public class MicroSiteServiceImpl implements MicroSiteService {
     @Override
     public Boolean registerMicroSite(MicrositeRegisterDTO microSiteInfo, String email) throws Exception {
 
-        Integer userId = userRepo.findByEmail(email).get().getId();
+        User user = userRepo.findByEmail(email).get();
+        Optional<Profile> profileOptional = profileRepo.findProfileByUser(user);
+        Profile profile = profileOptional.get();
 
         Venture venture = new Venture();
         venture.setAddress(microSiteInfo.getVentureAddress());
@@ -48,18 +51,28 @@ public class MicroSiteServiceImpl implements MicroSiteService {
         venture.setMapLatitude(microSiteInfo.getVentureMapLatitude());
         venture.setMapLongitude(microSiteInfo.getVentureMapLongitude());
         venture.setName(microSiteInfo.getVentureName());
+        venture.setUser(user);
         venture.setIsActive(false);
 
         Venture ventureSaved = ventureRepo.save(venture);
 
         MicroSite microSite = new MicroSite();
-        microSite.setAddress(microSiteInfo.getMicroSiteAddress());
         microSite.setDescription(microSiteInfo.getMicroSiteDescription());
-        microSite.setExperiences(microSite.getExperiences());
         microSite.setName(microSiteInfo.getMicrositeName());
         microSite.setIsActive(false);
         microSite.setVenture(ventureSaved);
-        microSiteRepo.save(microSite);
+
+        MicroSite micrositeSaved = microSiteRepo.save(microSite);
+        MicroSiteSolicitude solicitude = new MicroSiteSolicitude();
+        solicitude.setUser(profile);
+        solicitude.setStatus(MicroSiteSolicitudeStatus.PENDIENTE);
+        solicitude.setMicroSite(micrositeSaved);
+        solicitude.setVenture(ventureSaved);
+        solicitudeRepo.save(solicitude);
+
+        /*
+        area para enviar los correos tanto al solicitante como al admin
+         */
         return true;
     }
 }

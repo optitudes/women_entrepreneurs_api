@@ -29,8 +29,6 @@ public class MicroSite implements Serializable {
     @Column(name = "description", nullable = true, length = 100)
     private String description;
 
-    @Column(name = "address", nullable = true)
-    private String address;
 
     @Column(name = "experiences", nullable = true)
     private String experiences;
@@ -67,6 +65,8 @@ public class MicroSite implements Serializable {
 
     @OneToOne
     private Venture venture;
+    @OneToOne(mappedBy = "microSite")
+    private MicroSiteSolicitude microSiteSolicitude;
 
     @OneToMany(mappedBy="microSite")
     private List<Video> videoList;

@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService{
         User newUser = new User();
         newUser.setEmail(newUserInfo.getEmail());
         newUser.setPassword(newUserInfo.getPassword());
+        //temporal, luego se validara por correo
         newUser.setIsActive(true);
 
         Profile newProfile = new Profile();
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService{
         newProfile.setUser(newUser);
 
 
-        Optional<LevelAccess> levelAccess = levelAccessRepo.findByAccessCode(2);
+        Optional<LevelAccess> levelAccess = levelAccessRepo.findByAccessCode(3001);
         if (levelAccess.isPresent()){
             newUser.setLevelAccess(levelAccess.get()) ;
             userRepo.save(newUser);
@@ -78,7 +79,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO loginInfo) throws Exception {
-
         Optional<User> user = userRepo.findByIdNumber(loginInfo.getIdNumber());
 
         if (user.isEmpty()) {

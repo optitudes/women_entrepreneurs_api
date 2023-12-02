@@ -31,13 +31,13 @@ public class Profile implements Serializable {
     @Column(name="last_names", length=60,nullable = false)
     private String lastNames;
 
-    @Column(name="picture_url",length=45,nullable = true)
+    @Column(name="picture_url")
     private String picture_url;
 
     @Column(name="phone_number")
-    private Integer phoneNumber;
+    private Long phoneNumber;
 
-    @Column(name="address", length=45,nullable = true)
+    @Column(name="address", length=100)
     private String address;
 
     @Column(name="deleted_at")
@@ -66,6 +66,10 @@ public class Profile implements Serializable {
 
     @OneToOne
     private User user;
+    @OneToOne(mappedBy = "user")
+    private MicroSiteSolicitude microSiteSolicitudeMaked;
+    @OneToOne(mappedBy = "admin")
+    private MicroSiteSolicitude microSiteSolicitudeResponded;
 
     @OneToMany(mappedBy="profile")
     private List<Review> reviewList;

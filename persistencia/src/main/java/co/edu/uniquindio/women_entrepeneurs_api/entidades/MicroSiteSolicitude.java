@@ -1,14 +1,14 @@
 package co.edu.uniquindio.women_entrepeneurs_api.entidades;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Setter
@@ -16,24 +16,21 @@ import org.springframework.data.annotation.LastModifiedDate;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
+@Table(name = "micro_site_solicitude")
+public class MicroSiteSolicitude implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name="email", length=50,unique=true,nullable = false)
-    private String email;
+    @Column(name="status")
+    @Enumerated(value = EnumType.STRING)
+    private MicroSiteSolicitudeStatus status;
 
-    @Column(name="password",length=45,nullable = false)
-    private String password;
+    @Column(name="comment")
+    private String comment;
 
-    @Column(name="is_active",nullable = false)
-    private Boolean isActive;
 
-    @Column(name="email_verified_at")
-    private LocalDateTime emailVerifiedAt;
 
     @Column(name="deleted_at")
     private LocalDateTime deletedAt;
@@ -47,7 +44,7 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        MicroSiteSolicitude user = (MicroSiteSolicitude) o;
 
         return Objects.equals(id, user.id);
     }
@@ -58,18 +55,13 @@ public class User implements Serializable {
     }
 
 
-    @ManyToOne
-    @NotNull
-    private LevelAccess levelAccess;
-
-    @OneToOne(mappedBy="user")
-    private Profile profile;
-
-    @OneToOne(mappedBy="user")
+    @OneToOne
+    private Profile user;
+    @OneToOne
+    private Profile admin;
+    @OneToOne
     private Venture venture;
-
-
-
-
+    @OneToOne
+    private MicroSite microSite;
 
 }

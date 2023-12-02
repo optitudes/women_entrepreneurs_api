@@ -35,7 +35,6 @@ public class MircroSiteController {
         for (MicroSite microSite : microSites) {
             MicroSiteDTO microSiteDTO = new MicroSiteDTO();
             microSiteDTO.setName(microSite.getName());
-            microSiteDTO.setAddress(microSite.getAddress());
 
             if (!microSite.getImages().isEmpty()) {
                 Image firstImage = microSite.getImages().get(0);

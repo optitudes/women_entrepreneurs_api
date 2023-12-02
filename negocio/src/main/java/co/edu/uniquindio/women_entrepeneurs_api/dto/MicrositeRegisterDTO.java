@@ -22,11 +22,7 @@ public class MicrositeRegisterDTO {
     @NotNull
     private String ventureName;
     @Nullable
-    private String microSiteAddress;
-    @Nullable
     private String microSiteDescription;
-    @Nullable
-    private String micrositeExperiences;
     @NotNull
     private String micrositeName;
 
