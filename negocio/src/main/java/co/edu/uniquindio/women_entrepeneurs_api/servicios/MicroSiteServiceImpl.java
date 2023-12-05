@@ -10,6 +10,7 @@ import java.util.Optional;
 @Service
 public class MicroSiteServiceImpl implements MicroSiteService {
     private final MicroSiteRepo microSiteRepo;
+    private final MailServiceImpl mailService;
     private final VentureRepo ventureRepo;
     private final UserRepo userRepo;
     private final ProfileRepo profileRepo;
@@ -17,8 +18,9 @@ public class MicroSiteServiceImpl implements MicroSiteService {
 
 
 
-    public MicroSiteServiceImpl(MicroSiteRepo microSiteRepo, VentureRepo ventureRepo, UserRepo userRepo, ProfileRepo profileRepo, MicroSiteSolicitudeRepo solicitudeRepo) {
+    public MicroSiteServiceImpl(MicroSiteRepo microSiteRepo, MailServiceImpl mailService, VentureRepo ventureRepo, UserRepo userRepo, ProfileRepo profileRepo, MicroSiteSolicitudeRepo solicitudeRepo) {
         this.microSiteRepo = microSiteRepo;
+        this.mailService = mailService;
         this.ventureRepo = ventureRepo;
         this.userRepo = userRepo;
         this.profileRepo = profileRepo;
@@ -70,9 +72,10 @@ public class MicroSiteServiceImpl implements MicroSiteService {
         solicitude.setVenture(ventureSaved);
         solicitudeRepo.save(solicitude);
 
-        /*
-        area para enviar los correos tanto al solicitante como al admin
-         */
+        //notificaciones
+        mailService.sendMicrositeNotificationClient("optt.itudes@gmail.com",micrositeSaved.getName(),ventureSaved.getName(),MicroSiteSolicitudeStatus.PENDIENTE.toString());
+        mailService.sendMicrositeNotificationAdmin("optt.itudes@gmail.com",profile.getNames(),micrositeSaved.getName(),ventureSaved.getName());
+
         return true;
     }
 }

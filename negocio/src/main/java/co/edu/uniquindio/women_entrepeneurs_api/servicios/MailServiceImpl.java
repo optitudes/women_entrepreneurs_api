@@ -34,6 +34,224 @@ public class MailServiceImpl {
         }
 
     }
+    public boolean sendMicrositeNotificationClient(String email,String microSiteName,String ventureName,String status){
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setFrom(this.from);
+            helper.setTo(email);
+            helper.setSubject("Notificación solicitud micrositio");
+            helper.setText(getMicroSiteNotificationClientView(microSiteName,ventureName,status), true); // El segundo parámetro "true" indica que el contenido es HTML
+            javaMailSender.send(message);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + e.getCause());
+            return false;
+        }
+    }
+    public boolean sendMicrositeNotificationAdmin(String email,String userName,String microSiteName,String ventureName){
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setFrom(this.from);
+            helper.setTo(email);
+            helper.setSubject("Notificación solicitud micrositio");
+            helper.setText(getMicroSiteNotificationAdminView(microSiteName,ventureName,userName), true); // El segundo parámetro "true" indica que el contenido es HTML
+            javaMailSender.send(message);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + e.getCause());
+            return false;
+        }
+    }
+
+    private String getMicroSiteNotificationAdminView(String microSiteName, String ventureName, String userName) {
+    return "<!DOCTYPE html>\n" +
+            "<html lang=\"es\">\n" +
+            "<head>\n" +
+            "  <meta charset=\"UTF-8\">\n" +
+            "  <title>Solicitud de micrositio</title>\n" +
+            "</head>\n" +
+            "<body>\n" +
+            "  <header>\n" +
+            "    <img src=\"./TC_logo6w.png\" alt=\"Logo\" class=\"imagen-logo\">\n" +
+                getCssConfig()+
+            "  </header>\n" +
+            "  <main>\n" +
+            "    <div class=\"titulo-h2\">\n" +
+            "      <h2>Solicitud de micrositio</h2>\n" +
+            "    </div>\n" +
+            "    <div class=\"texto\">\n" +
+            "      <p>\n" +
+            "        Se ha registrado la solicitud de un micrositio por el usuario <strong> "+userName+"</strong>\n" +
+            "      </p>\n" +
+            "      <p>\n" +
+            "        para el micrositio <strong>"+microSiteName+"</strong> de la microempresa <strong>"+ventureName+"</strong>.\n" +
+            "      </p>\n" +
+            "      <p>\n" +
+            "        Para ver más detalles ingresa a url o da click en el botón.\n" +
+            "      </p>\n" +
+            "      <button class=\"boton\">\n" +
+            "        <span>Visitar</span>\n" +
+            "      </button>\n" +
+            "      <div class=\"imagen-logo-mitad\">\n" +
+            "        <img src=\"./TC_logo_ground.png\" alt=\"Imagen 1\">\n" +
+            "      </div>\n" +
+            "      <p class=\"url-turismo\">\n" +
+            "        WWW.TURISMOENLACORDILLERA.COM\n" +
+            "      </p>\n" +
+            "    </div>\n" +
+            "  </main>\n" +
+            "  <footer>\n" +
+            "    <p>\n" +
+            "      Copyright © 2023 turismoenlacordillera, all rights reserved.\n" +
+            "    </p>\n" +
+            "    <p>\n" +
+            "      Este mensaje ha sido generado de forma automática, por favor no responder ni dirigir algún correo a este remitente\n" +
+            "    </p>\n" +
+            "  </footer>\n" +
+            "</body>\n" +
+            "</html>";
+    }
+    private String getMicroSiteNotificationClientView(String microSiteName, String ventureName, String status){
+        return
+                "<!DOCTYPE html>\n" + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n" +
+                        "<head>\n" +
+                        " <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
+                        "   <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
+                        "   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" +
+                        " <title>Solicitud de micrositio</title>\n" +
+                        "</head>\n" +
+                        "<body style='background-color: #08403E;'>\n" +
+                        "   <header style='background-color: #520120; padding: 5px; text-align: center;'>\n" +
+                        "       <img src=\"./TC_logo6w.png\" style='width: 30%; min-width: 150px; height: 100%;'/>\n" +
+                        "   </header>\n" +
+                        "   <main style='background-color: #08403E; padding: 8px;'>\n" +
+                        "       <div class=\"titulo-h2\" style='text-align: center; color: aliceblue;'>\n" +
+                        "           <h2>Solicitud de micrositio</h2>\n" +
+                        "       </div>\n" +
+                        "       <div class=\"texto\" style='font-family: 'Montserrat', sans-serif; font-size: 22px;'>\n" +
+                        "           <p style='color: #FF0000'>\n" +
+                        "               Hemos recibido su solicitud para el micrositio <strong> "+microSiteName+"</strong> de su empresa <strong>"+ventureName+"</strong>.\n" +
+                        "           </p>\n" +
+                        "           <p>\n" +
+                        "               Actualmente, su solicitud se encuentra en el estado <strong>"+status+"</strong>.\n" +
+                        "           </p>\n" +
+                        "           <p> \n" +
+                        "               Le informaremos de cualquier avance en esta solicitud.\n" +
+                        "           </p>\n" +
+                        "           <div class=\"imagen-logo-mitad\" style='display: flex; justify-content: center; align-items: end; min-width: 100px; height: 50%;'>\n" +
+                        "               <img src=\"./TC_logo_ground.png\" alt=\"Imagen 1\" />\n" +
+                        "           </div>\n" +
+                        "           <p class=\"url-turismo\" style='font-family: 'Montserrat', sans-serif; font-size: 23px; display: flex; justify-content: center;'> \n" +
+                        "               WWW.TURISMOENLACORDILLERA.COM\n" +
+                        "           </p>\n" +
+                        "       </div>\n" +
+                        "   </main>\n" +
+                        "   <footer style='background-color: #520120; color: white; padding: 10px;'>\n" +
+                        "       <p style='color:#FEFE;'>\n" +
+                        "           Copyright © 2023 turismoenlacordillera, all rights reserved.\n" +
+                        "       </p>\n" +
+                        "       <p>\n" +
+                        "           Este mensaje ha sido generado de forma automatica, por favor no responder ni dirigir algún correo a este remitente\n" +
+                        "       </p>\n" +
+                        "   </footer>\n" +
+                        "</body>\n" +
+                        "</html>\n";
+    }
+
+    private String getCssConfig(){
+        return "<style type=\"text/css\">\n" +
+                "/* Style the header */\n" +
+                "header {\n" +
+                "  background-color: #520120;\n" +
+                "  padding: 5px;\n" +
+                "  text-align: center;\n" +
+                "}\n" +
+                "\n" +
+                "/* Adjust header logo size for smaller screens */\n" +
+                "@media (max-width: 600px) {\n" +
+                "  .imagen-logo {\n" +
+                "    width: 50%;\n" +
+                "  }\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the main content area */\n" +
+                "main {\n" +
+                "  background-color: #08403E;\n" +
+                "  padding: 8px;\n" +
+                "}\n" +
+                "\n" +
+                "/* Adjust font size for smaller screens */\n" +
+                "@media (max-width: 600px) {\n" +
+                "  .titulo-h2 h2,\n" +
+                "  .texto p,\n" +
+                "  .url-turismo {\n" +
+                "    font-size: 16px;\n" +
+                "  }\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the heading */\n" +
+                ".titulo-h2 {\n" +
+                "  text-align: center;\n" +
+                "  color: aliceblue;\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the text content */\n" +
+                ".texto {\n" +
+                "  font-family: 'Montserrat', sans-serif;\n" +
+                "  font-size: 22px;\n" +
+                "}\n" +
+                "\n" +
+                "/* Style paragraphs */\n" +
+                "p {\n" +
+                "  color: aliceblue;\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the logo image */\n" +
+                ".imagen-logo {\n" +
+                "  width: 30%;\n" +
+                "  min-width: 150px;\n" +
+                "  height: 100%;\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the logo image in the footer */\n" +
+                ".imagen-logo-mitad {\n" +
+                "  display: flex;\n" +
+                "  justify-content: center;\n" +
+                "  align-items: end;\n" +
+                "  min-width: 100px;\n" +
+                "  height: 50%;\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the tourism URL */\n" +
+                ".url-turismo {\n" +
+                "  font-family: 'Montserrat', sans-serif;\n" +
+                "  font-size: 23px;\n" +
+                "  display: flex;\n" +
+                "  justify-content: center;\n" +
+                "}\n" +
+                "\n" +
+                "/* Style the footer */\n" +
+                "footer {\n" +
+                "  background-color: #520120;\n" +
+                "  color: white;\n" +
+                "  padding: 10px;\n" +
+                "}\n" +
+                "\n" +
+                ".boton {\n" +
+                "  background-color: #962B09;\n" +
+                "  color: #fff;\n" +
+                "  padding: 25px 30px;\n" +
+                "  border-radius: 35px;\n" +
+                "  cursor: pointer;\n" +
+                "  margin: 0 auto;\n" +
+                "  display: block;\n" +
+                "}\n" +
+                "\t</style>";
+    }
     public boolean sendEmailVerification(String email,String username,String emailToken){
         try {
             MimeMessage message = javaMailSender.createMimeMessage();

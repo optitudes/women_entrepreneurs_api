@@ -2,6 +2,7 @@ package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginRequestDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginResponseDTO;
+import co.edu.uniquindio.women_entrepeneurs_api.dto.UserProfileDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.User;
 
@@ -16,6 +17,7 @@ public interface UserService {
     void deleteUser(int id)throws Exception;
     void validateUserRegisterDTO(UserRegisterDTO user) throws Exception;
     List<User> listUsers() throws Exception;
-
+    //metodo que obtiene la informacion del usuario para mostrarla en la vista del perfil
+    UserProfileDTO getUserProfileInfo(String email) throws Exception;
     LoginResponseDTO login(LoginRequestDTO loginInfo) throws Exception;
 }

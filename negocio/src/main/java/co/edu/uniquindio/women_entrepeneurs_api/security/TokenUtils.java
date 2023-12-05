@@ -44,4 +44,9 @@ public class TokenUtils {
 
         return decrypted;
     }
+
+    public static String getEmailFromAuthorization(String authorization) {
+        String jwtToken = authorization.substring(7); // eliminamos el prefijo "Bearer "
+        return getEmailFromJWTToken(jwtToken);
+    }
 }

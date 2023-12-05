@@ -2,6 +2,7 @@ package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginRequestDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.LoginResponseDTO;
+import co.edu.uniquindio.women_entrepeneurs_api.dto.UserProfileDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.UserRegisterDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.LevelAccess;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.Profile;
@@ -78,6 +79,36 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public UserProfileDTO getUserProfileInfo(String email) throws Exception {
+
+        Optional<User> user = userRepo.findByEmail(email);
+
+        if (user.isEmpty()) {
+            throw new Exception("Usuario no existe");
+        }
+
+        User foundUser = user.get();
+        validateUser(foundUser);
+        Profile profile = foundUser.getProfile();
+
+        LevelAccess levelAccess = foundUser.getLevelAccess();
+        UserProfileDTO userProfileInfo = new UserProfileDTO();
+        //llenamos el dto con la info del usuario
+        userProfileInfo.setImageUrl(profile.getPicture_url());
+        userProfileInfo.setNames(profile.getNames());
+        userProfileInfo.setLastNames(profile.getLastNames());
+        userProfileInfo.setEmail(foundUser.getEmail());
+        userProfileInfo.setAddress(profile.getAddress());
+        userProfileInfo.setPhoneNumber(profile.getPhoneNumber());
+        userProfileInfo.setIdNumber(profile.getIdNumber());
+        userProfileInfo.setAccessName(levelAccess.getName());
+        userProfileInfo.setAccessDescription(levelAccess.getDescription());
+
+
+        return userProfileInfo;
+    }
+
+    @Override
     public LoginResponseDTO login(LoginRequestDTO loginInfo) throws Exception {
         Optional<User> user = userRepo.findByIdNumber(loginInfo.getIdNumber());
 
@@ -86,7 +117,11 @@ public class UserServiceImpl implements UserService{
         }
 
         User foundUser = user.get();
-        validateUser(foundUser, loginInfo.getPassword());
+        validateUser(foundUser);
+
+        if (!foundUser.getPassword().equals(loginInfo.getPassword())) {
+            throw new Exception("Contraseña incorrecta");
+        }
         LevelAccess levelAccess = foundUser.getLevelAccess();
 
         String userName = foundUser.getProfile().getNames();
@@ -97,8 +132,9 @@ public class UserServiceImpl implements UserService{
         LoginResponseDTO responseDTO = new LoginResponseDTO(null,userEmail,accessCode,accessName,accessDescription,userName);
 
         return responseDTO;
+
     }
-    private void validateUser(User user, String password) throws Exception {
+    private void validateUser(User user) throws Exception {
         if (!user.getIsActive()) {
             throw new Exception("Usuario no está activo");
         }
@@ -107,9 +143,6 @@ public class UserServiceImpl implements UserService{
             throw new Exception("El usuario no cuenta con correo electrónico verificado");
         }
 
-        if (!user.getPassword().equals(password)) {
-            throw new Exception("Contraseña incorrecta");
-        }
     }
     public void validateUserRegisterDTO(UserRegisterDTO userRegister) throws Exception {
         Optional<User> searched = userRepo.findByEmail(userRegister.getEmail());
@@ -121,5 +154,6 @@ public class UserServiceImpl implements UserService{
             throw new Exception("La identificacion de usuario ya existe");
         }
     }
+
 
 }
