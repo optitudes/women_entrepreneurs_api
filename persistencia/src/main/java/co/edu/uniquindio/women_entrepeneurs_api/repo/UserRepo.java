@@ -15,13 +15,12 @@ import java.util.Optional;
 public interface UserRepo extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmailAndPassword(String email, String password);
-
     Optional<User> findByEmail(String email);
-
     Page<User> findAll(Pageable pageable);
-
     Optional<User> findByEmailAndIsActive(String email, boolean isActive);
 
+    @Query("SELECT id FROM User  WHERE email = :email")
+    Optional<Integer> findIdByEmail(@Param("email") String email);
     @Query("SELECT u FROM User u WHERE u.profile.idNumber = :idNumber")
     Optional<User> findByIdNumber(@Param("idNumber") String idNumber);
 

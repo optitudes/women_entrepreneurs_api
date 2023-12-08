@@ -44,7 +44,8 @@ public class NegocioApplication extends SpringBootServletInitializer {
                     .antMatchers("/api/appinfo/general/**").authenticated()
                     .antMatchers( "/api/appinfo/root/**").hasAuthority("ROLE_ROOT")
                     .antMatchers( "/api/appinfo/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")
-                    //rutas relacionadas a usuarios
+                    .antMatchers( "/api/user/public/**").permitAll()
+                    //rutas relacionadas a usuarios logeados
                     .antMatchers( "/api/user/general/**").authenticated()
                     .antMatchers( "/api/user/root/**").hasAuthority("ROLE_ROOT")
                     .antMatchers( "/api/user/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")

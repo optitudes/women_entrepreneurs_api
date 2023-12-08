@@ -32,7 +32,18 @@ public class MailServiceImplTest {
     @Test
     public void sendMicrositeNotificationClient(){
         try{
-            mailService.sendMicrositeNotificationClient("optt.itudes@gmail.com","microName","ventureName","pendiente");
+            mailService.sendMicrositeNotificationClient("optt.itudes@gmail.com","microName","ventureName","PENDIENTE");
+            Assertions.assertTrue(true);
+
+        }catch  (Exception e){
+            e.printStackTrace();
+            Assertions.fail("No se pudo enviar el correo");
+        }
+    }
+    @Test
+    public void sendMicrositeNotificationAdmin(){
+        try{
+            mailService.sendMicrositeNotificationAdmin("optt.itudes@gmail.com","juan sebastian rojas","micrositio","empresa");
             Assertions.assertTrue(true);
 
         }catch  (Exception e){
