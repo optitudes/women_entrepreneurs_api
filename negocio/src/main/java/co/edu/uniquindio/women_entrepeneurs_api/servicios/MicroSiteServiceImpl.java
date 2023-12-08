@@ -1,10 +1,14 @@
 package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 
 import co.edu.uniquindio.women_entrepeneurs_api.dto.MicrositeRegisterDTO;
+import co.edu.uniquindio.women_entrepeneurs_api.dto.microsite.AdminMicroSiteSolicitudeDTO;
+import co.edu.uniquindio.women_entrepeneurs_api.dto.microsite.AdminMicroSiteSolicitudeRequestDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.*;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,6 +42,26 @@ public class MicroSiteServiceImpl implements MicroSiteService {
         if (ventureSearched.isPresent()){
             throw new Exception("El nombre del emprendimiento ya está en uso");
         }
+    }
+
+    @Override
+    public List<AdminMicroSiteSolicitudeDTO> getSolicitudesWithFilters(AdminMicroSiteSolicitudeRequestDTO filters) throws Exception {
+        List<MicroSiteSolicitude> microSiteSolicitudes = solicitudeRepo.obtainWithFilters(filters.getStatus());
+        ArrayList<AdminMicroSiteSolicitudeDTO> solicitudes = new ArrayList<>();
+
+        for(MicroSiteSolicitude solicitude: microSiteSolicitudes){
+            AdminMicroSiteSolicitudeDTO solicitudeFormated = new AdminMicroSiteSolicitudeDTO();
+            solicitudeFormated.setId(solicitude.getId());
+            solicitudeFormated.setMicroSiteName(solicitude.getMicroSite().getName());
+            solicitudeFormated.setVentureName(solicitude.getVenture().getName());
+            solicitudeFormated.setUserName(solicitude.getUser().getNames());
+            solicitudeFormated.setUserLastName(solicitude.getUser().getLastNames());
+            solicitudeFormated.setStatus(solicitude.getStatus());
+            solicitudeFormated.setComment(solicitude.getComment());
+            solicitudes.add(solicitudeFormated);
+        }
+
+        return solicitudes;
     }
 
     @Override

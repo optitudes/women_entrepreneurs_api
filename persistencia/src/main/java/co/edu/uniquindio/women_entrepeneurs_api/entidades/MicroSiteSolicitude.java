@@ -55,9 +55,11 @@ public class MicroSiteSolicitude implements Serializable {
     }
 
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="user_id",referencedColumnName = "id")
     private Profile user;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="admin_id",referencedColumnName = "id")
     private Profile admin;
     @OneToOne
     private Venture venture;

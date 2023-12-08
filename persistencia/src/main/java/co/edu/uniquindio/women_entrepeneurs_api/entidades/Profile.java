@@ -66,10 +66,10 @@ public class Profile implements Serializable {
 
     @OneToOne
     private User user;
-    @OneToOne(mappedBy = "user")
-    private MicroSiteSolicitude microSiteSolicitudeMaked;
-    @OneToOne(mappedBy = "admin")
-    private MicroSiteSolicitude microSiteSolicitudeResponded;
+    @OneToMany(mappedBy = "user")
+    private List<MicroSiteSolicitude> microSiteSolicitudeMaked;
+    @OneToMany(mappedBy = "admin")
+    private List<MicroSiteSolicitude> microSiteSolicitudeResponded;
 
     @OneToMany(mappedBy="profile")
     private List<Review> reviewList;
