@@ -27,7 +27,7 @@ public class MicroSiteSolicitude implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private MicroSiteSolicitudeStatus status;
 
-    @Column(name="comment")
+    @Column(name="comment",columnDefinition = "TEXT")
     private String comment;
 
 

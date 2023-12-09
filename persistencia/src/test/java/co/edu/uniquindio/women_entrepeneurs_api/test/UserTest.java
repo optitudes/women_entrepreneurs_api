@@ -99,15 +99,19 @@ public class UserTest {
             Assertions.fail("No se encontró el usuario");
         }
     }
+
+ */
     @Test
     //@Sql("classpath:dataset.sql")
-    public void filtrarEmailTest(){
-        Pageable paginador = PageRequest.of(0,2);
+    public void getAdminstEmail(){
 
-        Page<User> list = userRepo.findAll(paginador);
-        Assertions.assertNotNull(list, "La lista de usuarios filtrados por email no puede ser nula");
+        List<String> adminsEmailList= userRepo.findAdminsEmail();
+
+        for(String email:adminsEmailList)
+            System.out.println("admin list  :"+email);
+        Assertions.assertNotNull(adminsEmailList, "La lista de emails de admin no puede ser nuloa");
     }
 
 
- */
+
 }

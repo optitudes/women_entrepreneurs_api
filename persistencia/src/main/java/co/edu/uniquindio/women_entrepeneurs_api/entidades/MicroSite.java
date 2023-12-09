@@ -25,6 +25,8 @@ public class MicroSite implements Serializable {
 
     @Column(name="is_active",nullable = false)
     private Boolean isActive;
+    @Column(name="is_publish",nullable = false)
+    private Boolean isPublish;
 
     @Column(name = "description", nullable = true, length = 100)
     private String description;

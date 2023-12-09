@@ -3,6 +3,7 @@ package co.edu.uniquindio.women_entrepeneurs_api.servicios;
 import co.edu.uniquindio.women_entrepeneurs_api.NegocioApplication;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.microsite.AdminMicroSiteSolicitudeDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.dto.microsite.AdminMicroSiteSolicitudeRequestDTO;
+import co.edu.uniquindio.women_entrepeneurs_api.dto.microsite.UpdateSolicitudeStatusDTO;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.MicroSiteSolicitude;
 import co.edu.uniquindio.women_entrepeneurs_api.entidades.MicroSiteSolicitudeStatus;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.MicroSiteSolicitudeRepo;
@@ -34,6 +35,18 @@ class MicroSiteServiceImplTest {
             for(AdminMicroSiteSolicitudeDTO solicitude: result){
                 System.out.println(solicitude.toString());
             }
+            Assertions.assertTrue(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assertions.assertTrue(false);
+        }
+    }
+    @Test
+    void updateMicroSiteSolicitudeStatus() {
+        UpdateSolicitudeStatusDTO newStatus = new UpdateSolicitudeStatusDTO(7L,MicroSiteSolicitudeStatus.EN_PROCESO,"Se ha iniciado  la gestion de la solicitud");
+        try {
+             microSiteService.updateMicroSiteSolicitudeStatus(newStatus,"miasmadelvacio@gmail.com");
             Assertions.assertTrue(true);
 
         } catch (Exception e) {

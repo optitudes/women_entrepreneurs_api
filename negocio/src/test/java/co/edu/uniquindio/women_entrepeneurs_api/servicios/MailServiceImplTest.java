@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootTest(classes= NegocioApplication.class)
@@ -41,9 +43,35 @@ public class MailServiceImplTest {
         }
     }
     @Test
+    public void sendUpdatedMicrositeSolicitudeNotificationClient(){
+        try{
+            mailService.sendMicrositeUpdatedSolicitudeNotificationClient("optt.itudes@gmail.com","microName","El nuevo estado se da gracias a las validaciones pertinentes en gerencia","PENDIENTE");
+            Assertions.assertTrue(true);
+
+        }catch  (Exception e){
+            e.printStackTrace();
+            Assertions.fail("No se pudo enviar el correo");
+        }
+    }
+    @Test
     public void sendMicrositeNotificationAdmin(){
         try{
-            mailService.sendMicrositeNotificationAdmin("optt.itudes@gmail.com","juan sebastian rojas","micrositio","empresa");
+            List<String> admins = new ArrayList<>();
+            admins.add("optt.itudes@gmail.com");
+            mailService.sendMicrositeNotificationAdmin(admins,"juan sebastian rojas","micrositio","empresa");
+            Assertions.assertTrue(true);
+
+        }catch  (Exception e){
+            e.printStackTrace();
+            Assertions.fail("No se pudo enviar el correo");
+        }
+    }
+    @Test
+    public void sendMultipleHtmlMail(){
+        List<String> emails = new ArrayList<>();
+        emails.add("optt.itudes@gmail.com");emails.add("miasmadelvacio@gmail.com");
+        try{
+            mailService.sendMultipleHtmlMail(emails,"multiple emails","contenido de multiple emails");
             Assertions.assertTrue(true);
 
         }catch  (Exception e){
