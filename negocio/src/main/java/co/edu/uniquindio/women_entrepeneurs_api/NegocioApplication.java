@@ -4,17 +4,25 @@ import co.edu.uniquindio.women_entrepeneurs_api.exceptions.CustomAccessDeniedHan
 import co.edu.uniquindio.women_entrepeneurs_api.exceptions.CustomAuthenticationEntryPointException;
 import co.edu.uniquindio.women_entrepeneurs_api.security.CorsConfig;
 import co.edu.uniquindio.women_entrepeneurs_api.security.JWTAuthorizationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @SpringBootApplication
@@ -31,6 +39,11 @@ public class NegocioApplication extends SpringBootServletInitializer {
     @Configuration
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+        @Bean
+        public PasswordEncoder encoder() {
+            return new BCryptPasswordEncoder();
+        }
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.cors();
@@ -39,6 +52,10 @@ public class NegocioApplication extends SpringBootServletInitializer {
                     .authorizeRequests()
 
                     .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                    .antMatchers(HttpMethod.POST, "/api/auth/verifyEmail").permitAll()
+                    .antMatchers(HttpMethod.POST, "/api/auth/generateResetPasswordToken").permitAll()
+                    .antMatchers(HttpMethod.POST, "/api/auth/resetPassword").permitAll()
+
                     .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
                     //rutas relacionadas a la informacion de la app
                     .antMatchers("/api/appinfo/general/**").authenticated()

@@ -16,7 +16,10 @@ import java.util.Optional;
 public interface UserRepo extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmailAndPassword(String email, String password);
+    @Query("SELECT u FROM User u  WHERE u.email = :email AND u.deletedAt is null")
     Optional<User> findByEmail(String email);
+    @Query("SELECT u FROM User u  WHERE u.email = :email AND u.deletedAt is null  AND u.isActive = true  AND u.emailVerifiedAt is not null")
+    Optional<User> findAvailableByEmail(String email);
     Page<User> findAll(Pageable pageable);
     Optional<User> findByEmailAndIsActive(String email, boolean isActive);
 

@@ -11,8 +11,13 @@ import co.edu.uniquindio.women_entrepeneurs_api.repo.LevelAccessRepo;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.ProfileRepo;
 import co.edu.uniquindio.women_entrepeneurs_api.repo.UserRepo;
 import co.edu.uniquindio.women_entrepeneurs_api.security.TokenUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,13 +25,15 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService{
 
     private final UserRepo userRepo;
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
     private final ProfileRepo profileRepo;
 
     private final LevelAccessRepo levelAccessRepo;
     private  MailServiceImpl mailService;
 
 
-    public UserServiceImpl(UserRepo userRepo, LevelAccessRepo levelAccessRepo,ProfileRepo profileRepo, MailServiceImpl mailService) {
+    public UserServiceImpl(UserRepo userRepo , LevelAccessRepo levelAccessRepo, ProfileRepo profileRepo, MailServiceImpl mailService) {
         this.userRepo = userRepo;
         this.levelAccessRepo = levelAccessRepo;
         this.profileRepo = profileRepo;
@@ -71,6 +78,52 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(int id) throws Exception {
         userRepo.deleteById(id);
+    }
+
+    @Override
+    public void verifyEmail(String email) throws Exception {
+        Optional<User> userOptional = userRepo.findByEmail(email);
+        if (userOptional.isEmpty())
+            throw  new Exception("Usuario no encontrado");
+        User user = userOptional.get();
+        user.setEmailVerifiedAt(LocalDateTime.now());
+        userRepo.save(user);
+    }
+
+    @Override
+    public void sendPasswordResetToken(String email) throws Exception {
+        Optional<User> userOptional = userRepo.findAvailableByEmail(email);
+        if (userOptional.isEmpty())
+            throw  new Exception("Usuario no disponible para cambio de clave");
+        User user = userOptional.get();
+        //
+        String baseToken = user.getEmail()+"LocalDateTime"+LocalDateTime.now();
+        mailService.sendPasswordResetToken(user.getEmail(),TokenUtils.encriptAES(baseToken));
+    }
+
+    @Override
+    public void resetPassword(String token,String newPassword) throws Exception {
+        String resetTokenInfo = TokenUtils.decryptAES(token);
+        String[] resetTokenParts = resetTokenInfo.split("LocalDateTime");
+        validateTokenTTL(resetTokenParts[1]);
+        Optional<User> userOptional = userRepo.findAvailableByEmail(resetTokenParts[0]);
+        if(userOptional.isEmpty())
+            throw new Exception("Usuario no disponible para cambio de clave");
+        User user = userOptional.get();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepo.save(user);
+    }
+
+    private void validateTokenTTL(String date) throws Exception {
+        //a futuro se debe leer de la base de datos o de un
+        //archivo de configuracion (se omite por temas de tiempo)
+        int maxHours = 1;
+        LocalDateTime tokenDate = LocalDateTime.parse(date);
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        Duration timeElapsed = Duration.between(tokenDate,currentDate);
+        if(timeElapsed.toHours()>maxHours)
+            throw  new Exception("token expirado, genere uno nuevo");
     }
 
     @Override
@@ -119,7 +172,7 @@ public class UserServiceImpl implements UserService{
         User foundUser = user.get();
         validateUser(foundUser);
 
-        if (!foundUser.getPassword().equals(loginInfo.getPassword())) {
+        if (!passwordEncoder.matches(loginInfo.getPassword(),foundUser.getPassword())) {
             throw new Exception("Contraseña incorrecta");
         }
         LevelAccess levelAccess = foundUser.getLevelAccess();

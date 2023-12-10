@@ -15,6 +15,9 @@ public interface UserService {
     User updateUser(User u) throws Exception;
 
     void deleteUser(int id)throws Exception;
+    void verifyEmail(String email) throws Exception;
+    void sendPasswordResetToken(String email) throws Exception;
+    void resetPassword(String token,String newPassword) throws  Exception;
     void validateUserRegisterDTO(UserRegisterDTO user) throws Exception;
     List<User> listUsers() throws Exception;
     //metodo que obtiene la informacion del usuario para mostrarla en la vista del perfil
