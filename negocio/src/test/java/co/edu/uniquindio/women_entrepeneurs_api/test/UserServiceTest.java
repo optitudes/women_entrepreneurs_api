@@ -50,7 +50,7 @@ public class UserServiceTest {
     //@Sql("classpath:dataset.sql")
     public void passwordResetTokenTest(){
         try {
-            userService.resetPassword("5f-flMn5OfW7jOBx5TBVFwjWxvUy3rZfUxA4xmBVOsbfrpMArR8F5cmu74Bc6LysoqeOX7kKDrqVlQQmc1OirA==","pangolin");
+            userService.resetPassword("5f-flMn5OfW7jOBx5TBVFwjWxvUy3rZfUxA4xmBVOsYrcZBd7YSUJdsMTQCR0_-qmYAgXujyVObX_YWoUYm6pg==","unix");
             Assertions.assertTrue( true);
         }catch (Exception e){
             e.printStackTrace();

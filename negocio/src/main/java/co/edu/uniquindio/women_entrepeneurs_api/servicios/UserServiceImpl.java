@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 
         User newUser = new User();
         newUser.setEmail(newUserInfo.getEmail());
-        newUser.setPassword(newUserInfo.getPassword());
+        newUser.setPassword(passwordEncoder.encode(newUserInfo.getPassword()));
         //temporal, luego se validara por correo
         newUser.setIsActive(true);
 

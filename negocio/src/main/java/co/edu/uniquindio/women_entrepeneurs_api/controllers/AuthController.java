@@ -69,7 +69,7 @@ public class AuthController {
         }
     }
     @PostMapping("/resetPassword")
-    public ResponseEntity<MessageDTO> generateResetPasswordToken(@Valid @RequestBody ResetPasswordRequestDTO resetPasswordInfo){
+    public ResponseEntity<MessageDTO> resetPassword(@Valid @RequestBody ResetPasswordRequestDTO resetPasswordInfo){
         try{
             userServiceImpl.resetPassword(resetPasswordInfo.getToken(),resetPasswordInfo.getNewPassword());
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"Clave cambiada correctamente",null ));
