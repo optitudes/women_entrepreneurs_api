@@ -61,8 +61,8 @@ public class AuthController {
     @PostMapping("/generateResetPasswordToken")
     public ResponseEntity<MessageDTO> generateResetPasswordToken(@Valid @RequestBody GetTokenResetPasswordRequestDTO email){
         try{
-            userServiceImpl.verifyEmail(email.getEmail());
-            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"Email validado correctamente",email ));
+            userServiceImpl.sendPasswordResetToken(email.getEmail());
+            return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, true,"token de reestablecimiento de clave enviado",null ));
 
         } catch(Exception e){
             return ResponseEntity.status(200).body( new MessageDTO(HttpStatus.OK, false,"Ocurrió un error\n"+e.getMessage(),null ));
