@@ -6,4 +6,6 @@ public interface ImageService {
 
 Boolean uploadProfileImage(MultipartFile image, String email) throws Exception;
 byte[] getProfileImage(String imageName) throws Exception;
+byte[] getAppImage(String imageName) throws Exception;
+
 }

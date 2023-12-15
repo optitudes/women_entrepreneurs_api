@@ -58,6 +58,7 @@ public class NegocioApplication extends SpringBootServletInitializer {
 
                     .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
                     //rutas relacionadas a la informacion de la app
+                    .antMatchers("/api/appinfo/public/**").permitAll()
                     .antMatchers("/api/appinfo/general/**").authenticated()
                     .antMatchers( "/api/appinfo/root/**").hasAuthority("ROLE_ROOT")
                     .antMatchers( "/api/appinfo/admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_ROOT")

@@ -81,6 +81,12 @@ public class ImageServiceImpl implements ImageService{
         return getImageBytes ("uploads/pictures/profilePictures/",imageName) ;
     }
 
+    @Override
+    public byte[] getAppImage(String imageNameAux) throws Exception {
+        String imageName = cleanImageName(imageNameAux);
+        return getImageBytes ("uploads/pictures/app/",imageName) ;
+    }
+
     private byte[] getImageBytes(String folderPath, String imageName) throws IOException {
         Path path = Paths.get(folderPath+imageName);
         return Files.readAllBytes(path);
