@@ -84,7 +84,7 @@ public class AuthController {
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_"+role);
-
+        long expirationTime = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
         String token = Jwts
                 .builder()
                 .setId("softtekJWT")
@@ -94,7 +94,7 @@ public class AuthController {
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS512,
                         secretKey.getBytes()).compact();
 
