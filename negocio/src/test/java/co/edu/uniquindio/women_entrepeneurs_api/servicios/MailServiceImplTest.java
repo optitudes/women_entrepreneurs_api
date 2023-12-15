@@ -43,6 +43,28 @@ public class MailServiceImplTest {
         }
     }
     @Test
+    public void sendPasswordResetToken(){
+        try{
+            mailService.sendPasswordResetToken("optt.itudes@gmail.com","microName");
+            Assertions.assertTrue(true);
+
+        }catch  (Exception e){
+            e.printStackTrace();
+            Assertions.fail("No se pudo enviar el correo");
+        }
+    }
+    @Test
+    public void sendEmailVerificationToken(){
+        try{
+            mailService.sendEmailVerification("optt.itudes@gmail.com","sebas","asdf");
+            Assertions.assertTrue(true);
+
+        }catch  (Exception e){
+            e.printStackTrace();
+            Assertions.fail("No se pudo enviar el correo");
+        }
+    }
+    @Test
     public void sendUpdatedMicrositeSolicitudeNotificationClient(){
         try{
             mailService.sendMicrositeUpdatedSolicitudeNotificationClient("optt.itudes@gmail.com","microName","El nuevo estado se da gracias a las validaciones pertinentes en gerencia","PENDIENTE");

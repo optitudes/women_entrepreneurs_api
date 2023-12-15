@@ -94,7 +94,7 @@ public class MailServiceImpl {
                 "        <table style=\"background-color: #520120; padding: 5px; text-align: center;\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "          <tr>\n" +
                 "            <td>\n" +
-                "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "              <img src='https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgfg.png' style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "            </td>\n" +
                 "          </tr>\n" +
                 "        </table>\n" +
@@ -127,7 +127,7 @@ public class MailServiceImpl {
                 "                  </tr>\n" +
                 "                </table>\n" +
                 "                <div style=\"text-align: center;\">\n" +
-                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "                </div>\n" +
                 "                <p style=\"font-family: 'Montserrat', sans-serif; font-size: 12px; color: aliceblue;\">\n" +
                 "                  WWW.TURISMOENLACORDILLERA.COM\n" +
@@ -168,7 +168,7 @@ public class MailServiceImpl {
             "        <table style=\"background-color: #520120; padding: 5px; text-align: center;\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n" +
             "          <tr>\n" +
             "            <td>\n" +
-            "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+            "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
             "            </td>\n" +
             "          </tr>\n" +
             "        </table>\n" +
@@ -206,7 +206,7 @@ public class MailServiceImpl {
             "                  </tr>\n" +
             "                </table>\n" +
             "                <div style=\"text-align: center;\">\n" +
-            "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+            "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
             "                </div>\n" +
             "                <p style=\"font-family: 'Montserrat', sans-serif; font-size: 12px; color: aliceblue;\">\n" +
             "                  WWW.TURISMOENLACORDILLERA.COM\n" +
@@ -246,7 +246,7 @@ public class MailServiceImpl {
                 "        <table style=\"background-color: #520120; padding: 5px; text-align: center;\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "          <tr>\n" +
                 "            <td>\n" +
-                "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "            </td>\n" +
                 "          </tr>\n" +
                 "        </table>\n" +
@@ -277,7 +277,7 @@ public class MailServiceImpl {
                                  "<p>\n" +comment+
                 "                </p>\n" +
                 "                <div style=\"text-align: center;\">\n" +
-                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "                </div>\n" +
                 "                <p style=\"font-family: 'Montserrat', sans-serif; font-size: 14px; color: aliceblue;\">\n" +
                 "                  WWW.TURISMOENLACORDILLERA.COM\n" +
@@ -317,7 +317,7 @@ public class MailServiceImpl {
                 "        <table style=\"background-color: #520120; padding: 5px; text-align: center;\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "          <tr>\n" +
                 "            <td>\n" +
-                "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "              <img src='https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgfg.png' style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "            </td>\n" +
                 "          </tr>\n" +
                 "        </table>\n" +
@@ -346,7 +346,7 @@ public class MailServiceImpl {
                 "                  Le informaremos de cualquier avance en esta solicitud.\n" +
                 "                </p>\n" +
                 "                <div style=\"text-align: center;\">\n" +
-                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "                </div>\n" +
                 "                <p style=\"font-family: 'Montserrat', sans-serif; font-size: 14px; color: aliceblue;\">\n" +
                 "                  WWW.TURISMOENLACORDILLERA.COM\n" +
@@ -405,7 +405,7 @@ public class MailServiceImpl {
                 "        <table style=\"background-color: #520120; padding: 5px; text-align: center;\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "          <tr>\n" +
                 "            <td>\n" +
-                "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "              <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgfg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "            </td>\n" +
                 "          </tr>\n" +
                 "        </table>\n" +
@@ -433,12 +433,12 @@ public class MailServiceImpl {
                 "                <table style=\"margin: 0 auto;\" role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "                  <tr>\n" +
                 "                    <td>\n" +
-                "                        <a href='turismoenlacordillera.com/VerifyEmail/"+emailToken+"' style=\"font-size: 14px;background-color: #962B09; color: #fff; padding: 15px 20px; border-radius: 25px; cursor: pointer; display: block;\">Cambiar clave</a>\n" +
+                "                        <a href='turismoenlacordillera.com/VerifyEmail/"+emailToken+"' style=\"font-size: 14px;background-color: #962B09; color: #fff; padding: 15px 20px; border-radius: 25px; cursor: pointer; display: block;\">Validar correo</a>\n" +
                 "                    </td>\n" +
                 "                  </tr>\n" +
                 "                </table>\n" +
                 "                <div style=\"text-align: center;\">\n" +
-                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
+                "                  <img src=\"https://beta.api.turismoenlacordillera.com/api/appinfo/public/getAppImage/lgbg.png\" style=\"width: 100%; max-width: 150px; height: auto;\" />\n" +
                 "                </div>\n" +
                 "                <p style=\"font-family: 'Montserrat', sans-serif; font-size: 12px; color: aliceblue;\">\n" +
                 "                  WWW.TURISMOENLACORDILLERA.COM\n" +
